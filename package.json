@@ -19,12 +19,18 @@
         "lodash": "^4.17.13",
         "popper.js": "^1.12",
         "resolve-url-loader": "^2.3.1",
-        "sass": "^1.26.5",
-        "sass-loader": "^8.0.0",
+        "sass": "^1.26.8",
+        "sass-loader": "^7.3.1",
         "vue": "^2.5.17",
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "ignore-errors": "^1.0.0"
+        "daterangepicker": "^3.1.0",
+        "gsap": "^2.1",
+        "ignore-errors": "^1.0.0",
+        "imagesloaded": "^4.1.4",
+        "litepicker": "^1.5.5",
+        "moment": "^2.27.0",
+        "three": "^0.117.1"
     }
 }
