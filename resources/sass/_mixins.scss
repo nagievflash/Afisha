@@ -156,8 +156,8 @@
 
 //transitions
 @mixin transitions() {
-    -moz-transition:    .4s ease-in-out all;
-    -o-transition:      .4s ease-in-out all;
-    -webkit-transition: .4s ease-in-out all;
-    transition:         .4s ease-in-out all;
+    -moz-transition:    .3s ease-in-out all;
+    -o-transition:      .3s ease-in-out all;
+    -webkit-transition: .3s ease-in-out all;
+    transition:         .3s ease-in-out all;
 }

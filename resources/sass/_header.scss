@@ -1,5 +1,7 @@
 header {
-    padding:33px 0;
+    z-index:2;
+    position: relative;
+    padding:30px 0 0;
     .search {
         width:100%;
         .input-group {
@@ -8,7 +10,7 @@ header {
             #search-input {
                 background-color:#ffffff;
                 border:none;
-                padding-left:15px;
+                padding-left:20px; 
                 border-radius:20px;
                 filter: drop-shadow(0 10px 15px #F8E6E6);
                 box-shadow:none;
@@ -55,7 +57,7 @@ header {
         }
     }
     .main-menu {
-        margin-top:30px;
+        margin-top:28px;
         li {
             margin-right:18px;
             a {
@@ -68,6 +70,9 @@ header {
         }
     }
     .top-filter {
-        margin-top:35px;
+        margin-top:32px;
+        .search-calendar {
+            margin-bottom:0;
+        }
     }
 }

@@ -16,3 +16,14 @@
     font-weight: bold;
     font-style: normal;
 }
+
+@font-face {font-family: "IntroBold";
+    src: url("/fonts/Intro/Intro-Bold.eot"); /* IE9*/
+    src: url("/fonts/Intro/Intro-Bold.eot?#iefix") format("embedded-opentype"), /* IE6-IE8 */
+    url("/fonts/Intro/Intro-Bold.woff2") format("woff2"), /* chrome firefox */
+    url("/fonts/Intro/Intro-Bold.woff") format("woff"), /* chrome firefox */
+    url("/fonts/Intro/Intro-Bold.ttf") format("truetype"), /* chrome firefox opera Safari, Android, iOS 4.2+*/
+    url("/fonts/Intro/Intro-Bold.svg") format("svg"); /* iOS 4.1- */
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;1,700&display=swap');

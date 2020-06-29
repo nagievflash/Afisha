@@ -38,22 +38,24 @@ const displacementSlider = function(opts) {
         }
     `;
 
-    let images = opts.images, image, sliderImages = [];;
+    let images = opts.images, image, sliderImages = [];
     let canvasWidth = images[0].clientWidth;
     let canvasHeight = images[0].clientHeight;
     let parent = opts.parent;
-    let renderWidth = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
-    let renderHeight = Math.max(document.documentElement.clientHeight, window.innerHeight || 0);
+    let renderWidth = document.getElementById('slider').offsetWidth;
+    let renderHeight = document.getElementById('slider').offsetHeight;
 
     let renderW, renderH;
 
     if( renderWidth > canvasWidth ) {
         renderW = renderWidth;
+        renderH = renderHeight * (renderWidth / canvasWidth);
     } else {
         renderW = canvasWidth;
+        renderH = canvasHeight;
     }
-
-    renderH = canvasHeight;
+    console.log(renderW);
+    console.log(renderH);
 
     let renderer = new THREE.WebGLRenderer({
         antialias: false,
@@ -142,10 +144,8 @@ const displacementSlider = function(opts) {
                         }
                     });
 
-                    let slideTitleEl = document.getElementById('slide-title');
-                    let slideStatusEl = document.getElementById('slide-status');
-                    let nextSlideTitle = document.querySelectorAll(`[data-slide-title="${slideId}"]`)[0].innerHTML;
-                    let nextSlideStatus = document.querySelectorAll(`[data-slide-status="${slideId}"]`)[0].innerHTML;
+                    let slideTitleEl = document.getElementById('slide');
+                    let nextSlideTitle = document.querySelectorAll(`[data-slide-content="${slideId}"]`)[0].innerHTML;
 
                     TweenLite.fromTo( slideTitleEl, 0.5,
                         {
@@ -165,29 +165,6 @@ const displacementSlider = function(opts) {
                                     autoAlpha: 1,
                                     filter: 'blur(0px)',
                                     y: 0,
-                                })
-                            }
-                        });
-
-                    TweenLite.fromTo( slideStatusEl, 0.5,
-                        {
-                            autoAlpha: 1,
-                            filter: 'blur(0px)',
-                            y: 0
-                        },
-                        {
-                            autoAlpha: 0,
-                            filter: 'blur(10px)',
-                            y: 20,
-                            ease: 'Expo.easeIn',
-                            onComplete: function () {
-                                slideStatusEl.innerHTML = nextSlideStatus;
-
-                                TweenLite.to( slideStatusEl, 0.5, {
-                                    autoAlpha: 1,
-                                    filter: 'blur(0px)',
-                                    y: 0,
-                                    delay: 0.1,
                                 })
                             }
                         });
@@ -226,3 +203,124 @@ imagesLoaded( document.querySelectorAll('img'), () => {
     });
 
 });
+
+//slideset
+var slideset = function slideset() {
+    var slideDelay = 250;
+    var slideDuration = 0.3;
+
+    var slides = document.querySelectorAll(".slide");
+    var prevButton = document.querySelector("#prevButton");
+    var nextButton = document.querySelector("#nextButton");
+
+    var numSlides = slides.length;
+
+    for (var i = 0; i < numSlides; i++) {
+      TweenLite.set(slides[i], {
+        xPercent: i * 100
+      });
+    }
+
+    var wrap = wrapPartial(-100, (numSlides - 1) * 100);
+    var timer = TweenLite.delayedCall(slideDelay, autoPlay);
+
+    var animation = TweenMax.to(slides, 1, {
+      xPercent: "+=" + (numSlides * 100),
+      ease: Linear.easeNone,
+      paused: true,
+      repeat: -1,
+      modifiers: {
+        xPercent: wrap
+      }
+    });
+
+    var proxy = document.createElement("div");
+    TweenLite.set(proxy, { x: "+=0" });
+    var transform = proxy._gsTransform;
+    var slideAnimation = TweenLite.to({}, 0.1, {});
+    var slideWidth = 0;
+    var wrapWidth = 0;
+    resize();
+
+    var draggable = new Draggable(proxy, {
+      trigger: ".slides-container",
+      throwProps: true,
+      onPress: updateDraggable,
+      onDrag: updateProgress,
+      onThrowUpdate: updateProgress,
+      snap: {
+        x: snapX
+      }
+    });
+
+    window.addEventListener("resize", resize);
+
+    prevButton.addEventListener("click", function() {
+      animateSlides(1);
+    });
+
+    nextButton.addEventListener("click", function() {
+      animateSlides(-1);
+    });
+
+    function updateDraggable() {
+
+      timer.restart(true);
+      slideAnimation.kill();
+      this.update();
+    }
+
+    function animateSlides(direction) {
+
+      timer.restart(true);
+      slideAnimation.kill();
+
+      var x = snapX(transform.x + direction * slideWidth);
+
+      slideAnimation = TweenLite.to(proxy, slideDuration, {
+        x: x,
+        onUpdate: updateProgress
+      });
+    }
+
+    function autoPlay() {
+
+      if (draggable.isPressed || draggable.isDragging || draggable.isThrowing) {
+        timer.restart(true);
+      } else {
+        animateSlides(-1);
+      }
+    }
+
+    function updateProgress() {
+      animation.progress(transform.x / wrapWidth);
+    }
+
+    function snapX(x) {
+      return Math.round(x / slideWidth) * slideWidth;
+    }
+
+    function resize() {
+
+      var norm = (transform.x / wrapWidth) || 0;
+
+      slideWidth = slides[0].offsetWidth;
+      wrapWidth = slideWidth * numSlides;
+
+      TweenLite.set(proxy, {
+        x: norm * wrapWidth
+      });
+
+      animateSlides(0);
+      slideAnimation.progress(1);
+    }
+
+    function wrapPartial(min, max) {
+      var r = max - min;
+      return function(value) {
+        var v = value - min;
+        return ((r + v % r) % r) + min;
+      }
+    }
+}
+slideset();

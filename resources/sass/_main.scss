@@ -1,9 +1,17 @@
 html {
     font-family: 'Circe', sans-serif;
     font-size:15px;
+    body {
+        background:#fff;
+    }
 }
-
-
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Merriweather', serif;
+    font-weight:bold;
+}
+.main-content {
+    margin-top:75px;
+}
 .input-group {
     position:relative;
 
@@ -32,5 +40,136 @@ html {
             border:none;
 
         }
+    }
+}
+.section-title {
+    h2 {
+        font-size:36px;
+        font-weight:400;
+        margin-bottom: 60px;
+        line-height:1.5;
+        color:#6A515E;
+    }
+}
+.items-list {
+    .item {
+        position: relative;
+
+        .item-wrapper {
+            box-shadow: 0px 10px 80px #FBEAEB;
+            overflow:hidden;
+            border-radius: 40px;
+            position: relative;
+            cursor:pointer;
+            .item-background {
+                position:absolute;
+                top:-1px;
+                width:101%;
+                height:100%;
+                background-size:100%;
+                background-position: center top;
+                background-repeat: no-repeat;
+                mask:url(/css/icons/Union.svg);
+                -webkit-mask-size: contain;
+                mask-size: contain;
+            }
+            @include transition();
+        }
+        .item-price {
+            position:absolute;
+            bottom:110px;
+            right:-3px;
+            border-radius:40px;
+            background: linear-gradient(33.27deg, #FF6868 20.7%, #FFCA6A 75.17%);
+            width:192px;
+            height:44px;
+            line-height:44px;
+            text-align: center;
+            font-size: 18px;
+            font-weight:bold;
+            color:#fff;
+            z-index: 2;
+            @include transition();
+            text-decoration:none;
+        }
+        .item-image {
+            padding:30px 25px 20px;
+            min-height:216px;
+            position: relative;
+            & * {
+                color:#fff;
+            }
+            svg {
+                width:18px;
+                margin-top:-2px;
+            }
+        }
+        .item-content {
+            padding:13px 40px 20px;
+            .item-title {
+                font-family: Circe;
+                font-size: 18px;
+                font-weight:bold;
+                width:100%;
+                text-align:center;
+                line-height: 150%;
+                margin-bottom:7px;
+                color:#6A515E;
+            }
+            .item-info {
+                font-size:14px;
+                color:#A06784;
+                svg {
+                    vertical-align: middle;
+                    path {
+                        fill:#DABCCB
+                    }
+                }
+                span {
+                    margin-left:5px;
+                    vertical-align: middle;
+                }
+            }
+        }
+        &:hover {
+            .item-wrapper {
+                box-shadow: 0px 15px 40px #bca4a6;
+                transform: translateY(-5px);
+            }
+            .item-price {
+                transform: translateY(-5px);
+            }
+        }
+
+    }
+}
+
+@import 'slideset';
+@import 'promo';
+
+#events {
+    margin-top:60px;
+    .item {
+        margin-bottom:60px;
+        .item-price {
+            left:-3px;
+            right:auto;
+            font-weight: 400;
+            font-size: 14px;
+            color:#A06784;
+            background:#fff;
+            box-shadow: 0px 10px 30px rgba(106, 81, 94, 0.2);
+        }
+    }
+    .readmore {
+        font-size:18px;
+        font-weight: bold;
+        padding:15px 0 14px;
+        text-align:center;
+        background: linear-gradient(23.36deg, #FF6868 20.7%, #FFCA6A 75.17%);
+        border-radius: 40px;
+        width:100%;
+        color:#fff;
+        text-decoration: none;
     }
 }

@@ -36,11 +36,11 @@ window.moment = require('moment');
 window.moment.locale('ru');
 
 //gsap
-import { TweenLite, TimelineMax, Linear, Back, Sine } from 'gsap/all'; 
-
+import { ModifiersPlugin } from 'gsap/all';
+import ThrowPropsPlugin from 'gsap/src/uncompressed/plugins/ThrowPropsPlugin';
 //three js
 global.THREE = require('three');
-global.imagesLoaded  = require('imagesloaded');
+global.imagesLoaded  = require('imagesloaded'); 
 
 
 //slider
