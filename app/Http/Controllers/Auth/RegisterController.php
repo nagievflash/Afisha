@@ -50,9 +50,27 @@ class RegisterController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => ['required', 'string', 'max:255'],
+            'name' => ['required', 'regex:/^[a-zA-Z а-яё А-ЯЁ ]+$/u', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'birthday' => ['required'],
+            'phone' => ['required', 'numeric', 'digits_between:9,11'],
+        ],
+        [
+            'name.required' => 'Введите имя',
+            'name.regex' => 'Имя должно состоять только из русских букв',
+            'name.max' => 'Имя не может быть длинее 256 символов',
+            'email.required'  => 'Введите Email',
+            'email.unique'  => 'Этот Email уже используется',
+            'email.string'  => 'Не верный формат электронной почты',
+            'email.email'  => 'Не верный формат электронной почты',
+            'phone.required'  => 'Введите Телефон',
+            'phone.numeric'  => 'Не верный номер телефона',
+            'phone.digits_between'  => 'Введите от 9 до 11 цифр',
+            'birthday.required'  => 'Введите дату рождения',
+            'password.required'  => 'Пароль не может быть пустым',
+            'password.confirmed'  => 'Пароли не совпадают',
+            'password.min'   => 'Пароль должен быть длинее 8 символов'
         ]);
     }
 
@@ -67,6 +85,8 @@ class RegisterController extends Controller
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
+            'phone' => $data['phone'],
+            'birthday' => $data['birthday'],
             'password' => Hash::make($data['password']),
         ]);
     }

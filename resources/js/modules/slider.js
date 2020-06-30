@@ -54,8 +54,6 @@ const displacementSlider = function(opts) {
         renderW = canvasWidth;
         renderH = canvasHeight;
     }
-    console.log(renderW);
-    console.log(renderH);
 
     let renderer = new THREE.WebGLRenderer({
         antialias: false,
@@ -206,12 +204,12 @@ imagesLoaded( document.querySelectorAll('img'), () => {
 
 //slideset
 var slideset = function slideset() {
-    var slideDelay = 250;
+    var slideDelay = 4;
     var slideDuration = 0.3;
 
     var slides = document.querySelectorAll(".slide");
-    var prevButton = document.querySelector("#prevButton");
-    var nextButton = document.querySelector("#nextButton");
+    //var prevButton = document.querySelector("#prevButton");
+    //var nextButton = document.querySelector("#nextButton");
 
     var numSlides = slides.length;
 
@@ -255,14 +253,14 @@ var slideset = function slideset() {
 
     window.addEventListener("resize", resize);
 
-    prevButton.addEventListener("click", function() {
+    /*prevButton.addEventListener("click", function() {
       animateSlides(1);
     });
 
     nextButton.addEventListener("click", function() {
       animateSlides(-1);
     });
-
+*/
     function updateDraggable() {
 
       timer.restart(true);

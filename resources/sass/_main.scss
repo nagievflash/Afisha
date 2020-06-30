@@ -11,33 +11,68 @@ h1, h2, h3, h4, h5, h6 {
 }
 .main-content {
     margin-top:75px;
+    overflow: hidden;
+}
+.invalid-feedback {
+    font-size: 14px;
+    margin-top: 5px;
+    text-align: right;
+}
+.btn {
+    border-radius: 40px;
+    width:100%;
+    font-size:18px;
+    font-weight:bold;
+    height: 46px;
+    color: #fcf4f4;
+    cursor:pointer;
+    &.btn-blue {
+        background: #3c79e8;
+    }
+    &.btn-yellow {
+        background: linear-gradient(28.82deg, #FF6868 20.7%, #FFCA6A 75.17%);
+    }
+    &.btn-link {
+        color:#a06c8b;
+        &:hover {
+            text-decoration: underline;
+        }
+    }
 }
 .input-group {
     position:relative;
 
-    input, select {
-        background-color:#ffffff;
-        border:none;
-        padding:9px 15px 7px;
+    input, select  {
+        background-color: #f8f8f8;
+        border: none;
         border-radius:20px!important;
-        filter: drop-shadow(0 10px 15px #F8E6E6);
+        padding:13px 15px 10px;
+        padding-left:25px;
+        filter:none;
+        font-size: 1.2em;
         box-shadow:none;
-        cursor:pointer;
-        @include placeholder-color(#C7ABBA);
+        height:auto;
+        cursor:text!important;
+        @include placeholder-color(#777);
         &:active, &:focus {
-            filter: drop-shadow(0 12px 16px #eababa);
             border:none;
             box-shadow:none;
         }
         @include transitions();
     }
     .input-group-prepend {
-        position:absolute;
-        right:0;
-        top:3px;
+        position: absolute;
+        right: 3px;
+        top: 10px;
+        z-index: 3;
         .input-group-text {
             background-color:transparent;
             border:none;
+            svg {
+                path {
+                    fill:#a9a7a7
+                }
+            }
 
         }
     }

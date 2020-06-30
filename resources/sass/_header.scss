@@ -8,23 +8,27 @@ header {
             position:relative;
 
             #search-input {
-                background-color:#ffffff;
-                border:none;
-                padding-left:20px; 
+                background-color: #f8f8f8;
+                border: none;
                 border-radius:20px;
-                filter: drop-shadow(0 10px 15px #F8E6E6);
+                padding:13px 15px 10px;
+                padding-left:25px;
+                filter:none;
+                font-size: 1.2em;
                 box-shadow:none;
-                @include placeholder-color(#C7ABBA);
+                height:auto;
+                cursor:text!important;
+                @include placeholder-color(#777);
                 &:active, &:focus {
-                    filter: drop-shadow(0 12px 16px #eababa);
                     border:none;
                 }
                 @include transitions();
             }
             .input-group-prepend {
-                position:absolute;
-                right:3px;
-                top:5px;
+                position: absolute;
+                right: 3px;
+                top: 10px;
+                z-index: 3;
                 .input-group-text {
                     background-color:transparent;
                     border:none;
@@ -38,34 +42,79 @@ header {
         @include flex-direction(row);
 
         a {
-            border-radius: 100%;
-            filter: drop-shadow(0 10px 15px #F8E6E6);
-            margin-left:14px;
-            background-color:#fff;
-            width:37px;
-            height:37px;
-            box-sizing: border-box;
-            @include align-items(center);
-            @include flexbox();
-            @include justify-content(center);
+            &.icon {
+                border-radius: 100%;
+                padding: 5px 15px;
+                border-radius: 20px;
+                box-sizing: border-box;
+                text-decoration: none;
+                @include align-items(center);
+                @include flexbox();
+                @include justify-content(center);
+                &:hover {
+                    background: #f1eeee;
+                }
+                &.profile-icon {
+                    margin-right:-5px;
+                }
+            }
+            cursor:pointer;
             svg {
                 margin:0 auto;
             }
             &.wishlist-icon {
-                padding-top:2px;
+                padding-top: 7px;
+                color: #333;
+                font-size: 18px;
+                svg {
+                    margin-right:8px;
+                    margin-top:-2px;
+                }
+            }
+            &.dropdown-toggle:after {
+                content:none;
+            }
+        }
+        .dropdown-menu {
+            width: 300px;
+            padding: 25px 30px;
+            border-radius: 12px;
+            z-index: 999999;
+            top: -40px!important;
+            right: 0px!important;
+            left: auto!important;
+            box-shadow: rgba(0, 0, 0, 0.235) 0px 10px 40px;
+            border:none;
+            a {
+                font-size:15px;
+                padding: 0.3rem 1.5rem;
+                color: #785272;
+                &:hover {
+                    color:#333;
+                }
+                &:active {
+                    background-color:#fbf2f3
+                }
             }
         }
     }
-    .main-menu {
-        margin-top:28px;
-        li {
-            margin-right:18px;
-            a {
-                color:#6A515E;
-                font-size:15px;
-                font-weight:bold;
-                text-transform: uppercase;
-                text-decoration: none;
+    .menu-wrapper {
+        width:100%;
+        .main-menu {
+            margin-top:35px;
+            li {
+                margin-right: 35px;
+                &:last-child {
+                    margin-right:0;
+                }
+                a {
+                    color:#6A515E;
+                    font-size:16px;
+                    font-weight:bold;
+                    text-transform: uppercase;
+                    text-decoration: none;
+                    letter-spacing: .03em;
+                }
             }
         }
     }

@@ -40,16 +40,17 @@ import { ModifiersPlugin } from 'gsap/all';
 import ThrowPropsPlugin from 'gsap/src/uncompressed/plugins/ThrowPropsPlugin';
 //three js
 global.THREE = require('three');
-global.imagesLoaded  = require('imagesloaded'); 
+global.imagesLoaded  = require('imagesloaded');
 
 
 //slider
 require ('./modules/slider.js');
 
-//daterangepicker
-require ('./modules/daterangepicker.js')
 
 
 
 //custom js
 require ('./custom.js');
+
+//daterangepicker
+require ('./modules/daterangepicker.js')

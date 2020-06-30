@@ -127212,13 +127212,13 @@ window.moment.locale('ru'); //gsap
 global.THREE = __webpack_require__(/*! three */ "./node_modules/three/build/three.module.js");
 global.imagesLoaded = __webpack_require__(/*! imagesloaded */ "./node_modules/imagesloaded/imagesloaded.js"); //slider
 
-__webpack_require__(/*! ./modules/slider.js */ "./resources/js/modules/slider.js"); //daterangepicker
+__webpack_require__(/*! ./modules/slider.js */ "./resources/js/modules/slider.js"); //custom js
 
 
-__webpack_require__(/*! ./modules/daterangepicker.js */ "./resources/js/modules/daterangepicker.js"); //custom js
+__webpack_require__(/*! ./custom.js */ "./resources/js/custom.js"); //daterangepicker
 
 
-__webpack_require__(/*! ./custom.js */ "./resources/js/custom.js");
+__webpack_require__(/*! ./modules/daterangepicker.js */ "./resources/js/modules/daterangepicker.js");
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./../../node_modules/webpack/buildin/global.js */ "./node_modules/webpack/buildin/global.js")))
 
 /***/ }),
@@ -127277,7 +127277,7 @@ window.daterangepicker = __webpack_require__(/*! daterangepicker */ "./node_modu
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-
+console.log('fsdf');
 
 /***/ }),
 
@@ -127337,8 +127337,6 @@ var displacementSlider = function displacementSlider(opts) {
     renderH = canvasHeight;
   }
 
-  console.log(renderW);
-  console.log(renderH);
   var renderer = new THREE.WebGLRenderer({
     antialias: false
   });
@@ -127454,11 +127452,11 @@ imagesLoaded(document.querySelectorAll('img'), function () {
 }); //slideset
 
 var slideset = function slideset() {
-  var slideDelay = 250;
+  var slideDelay = 4;
   var slideDuration = 0.3;
-  var slides = document.querySelectorAll(".slide");
-  var prevButton = document.querySelector("#prevButton");
-  var nextButton = document.querySelector("#nextButton");
+  var slides = document.querySelectorAll(".slide"); //var prevButton = document.querySelector("#prevButton");
+  //var nextButton = document.querySelector("#nextButton");
+
   var numSlides = slides.length;
 
   for (var i = 0; i < numSlides; i++) {
@@ -127498,12 +127496,13 @@ var slideset = function slideset() {
     }
   });
   window.addEventListener("resize", resize);
-  prevButton.addEventListener("click", function () {
+  /*prevButton.addEventListener("click", function() {
     animateSlides(1);
   });
-  nextButton.addEventListener("click", function () {
+    nextButton.addEventListener("click", function() {
     animateSlides(-1);
   });
+  */
 
   function updateDraggable() {
     timer.restart(true);
