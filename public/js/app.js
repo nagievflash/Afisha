@@ -127277,7 +127277,7 @@ window.daterangepicker = __webpack_require__(/*! daterangepicker */ "./node_modu
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-console.log('fsdf');
+
 
 /***/ }),
 
@@ -127288,26 +127288,59 @@ console.log('fsdf');
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-var today = new Date();
+function isoWeekdayCalc() {
+  isoWeekday = moment().isoWeekday();
+  var a = [];
+
+  if (isoWeekday < 6) {
+    a = [moment().add(6 - isoWeekday, 'days'), moment().add(7 - isoWeekday, 'days')];
+  } else if (isoWeekday == 6) {
+    a = [moment(), moment().add(1, 'days')];
+  } else {
+    a = [moment(), moment()];
+  }
+
+  return a;
+}
+
 var daterangepicker = $('input[name="range"]').daterangepicker({
   "timePickerSeconds": true,
   "autoApply": false,
+  "autoUpdateInput": true,
   ranges: {
     'Сегодня': [moment(), moment()],
-    'Завтра': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
-    'На это неделе': [moment().subtract(6, 'days'), moment()],
-    'В этом месяце': [moment().startOf('month'), moment().endOf('month')]
+    'Завтра': [moment().add(1, 'days'), moment().add(1, 'days')],
+    'В выходные': isoWeekdayCalc()
   },
   locale: {
-    'customRangeLabel': 'Выбрать дату'
+    format: 'DD MMMM'
   },
   "alwaysShowCalendars": true,
   "showCustomRangeLabel": false,
-  "minDate": today
+  "minDate": moment()
 }, function (start, end, label) {
+  $('.drp-selected').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
   console.log('New date range selected: ' + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD') + ' (predefined range: ' + label + ')');
+  location.href = '/filter?from=' + start.format('YYYY-MM-DD') + '&to=' + end.format('YYYY-MM-DD');
 });
-$('input[name="range"]').val('');
+$('input[name="range"]').on('apply.daterangepicker', function (ev, picker) {
+  if (picker.startDate.format('MMMM') == picker.endDate.format('MMMM')) {
+    if (picker.startDate.format('DD') != picker.endDate.format('DD')) {
+      $(this).val(picker.startDate.format('DD') + ' - ' + picker.endDate.format('DD MMMM'));
+    } else {
+      $(this).val(picker.endDate.format('DD MMMM'));
+    }
+  } else {
+    $(this).val(picker.startDate.format('DD MMMM') + ' - ' + picker.endDate.format('DD MMMM'));
+  }
+
+  $('.daterangepicker').hide();
+});
+$('input[name="range"]').on('show.daterangepicker', function (ev, picker) {
+  $('.daterangepicker .drp-selected').click(function () {
+    $('.applyBtn').click();
+  });
+});
 
 /***/ }),
 
@@ -127461,100 +127494,102 @@ var slideset = function slideset() {
 
   var numSlides = slides.length;
 
-  for (var i = 0; i < numSlides; i++) {
-    TweenLite.set(slides[i], {
-      xPercent: i * 100
+  if (slides.length > 0) {
+    /*prevButton.addEventListener("click", function() {
+      animateSlides(1);
     });
-  }
-
-  var wrap = wrapPartial(-100, (numSlides - 1) * 100);
-  var timer = TweenLite.delayedCall(slideDelay, autoPlay);
-  var animation = TweenMax.to(slides, 1, {
-    xPercent: "+=" + numSlides * 100,
-    ease: Linear.easeNone,
-    paused: true,
-    repeat: -1,
-    modifiers: {
-      xPercent: wrap
-    }
-  });
-  var proxy = document.createElement("div");
-  TweenLite.set(proxy, {
-    x: "+=0"
-  });
-  var transform = proxy._gsTransform;
-  var slideAnimation = TweenLite.to({}, 0.1, {});
-  var slideWidth = 0;
-  var wrapWidth = 0;
-  resize();
-  var draggable = new Draggable(proxy, {
-    trigger: ".slides-container",
-    throwProps: true,
-    onPress: updateDraggable,
-    onDrag: updateProgress,
-    onThrowUpdate: updateProgress,
-    snap: {
-      x: snapX
-    }
-  });
-  window.addEventListener("resize", resize);
-  /*prevButton.addEventListener("click", function() {
-    animateSlides(1);
-  });
-    nextButton.addEventListener("click", function() {
-    animateSlides(-1);
-  });
-  */
-
-  function updateDraggable() {
-    timer.restart(true);
-    slideAnimation.kill();
-    this.update();
-  }
-
-  function animateSlides(direction) {
-    timer.restart(true);
-    slideAnimation.kill();
-    var x = snapX(transform.x + direction * slideWidth);
-    slideAnimation = TweenLite.to(proxy, slideDuration, {
-      x: x,
-      onUpdate: updateProgress
-    });
-  }
-
-  function autoPlay() {
-    if (draggable.isPressed || draggable.isDragging || draggable.isThrowing) {
-      timer.restart(true);
-    } else {
+      nextButton.addEventListener("click", function() {
       animateSlides(-1);
-    }
-  }
-
-  function updateProgress() {
-    animation.progress(transform.x / wrapWidth);
-  }
-
-  function snapX(x) {
-    return Math.round(x / slideWidth) * slideWidth;
-  }
-
-  function resize() {
-    var norm = transform.x / wrapWidth || 0;
-    slideWidth = slides[0].offsetWidth;
-    wrapWidth = slideWidth * numSlides;
-    TweenLite.set(proxy, {
-      x: norm * wrapWidth
     });
-    animateSlides(0);
-    slideAnimation.progress(1);
-  }
-
-  function wrapPartial(min, max) {
-    var r = max - min;
-    return function (value) {
-      var v = value - min;
-      return (r + v % r) % r + min;
+    */
+    var updateDraggable = function updateDraggable() {
+      timer.restart(true);
+      slideAnimation.kill();
+      this.update();
     };
+
+    var animateSlides = function animateSlides(direction) {
+      timer.restart(true);
+      slideAnimation.kill();
+      var x = snapX(transform.x + direction * slideWidth);
+      slideAnimation = TweenLite.to(proxy, slideDuration, {
+        x: x,
+        onUpdate: updateProgress
+      });
+    };
+
+    var autoPlay = function autoPlay() {
+      if (draggable.isPressed || draggable.isDragging || draggable.isThrowing) {
+        timer.restart(true);
+      } else {
+        animateSlides(-1);
+      }
+    };
+
+    var updateProgress = function updateProgress() {
+      animation.progress(transform.x / wrapWidth);
+    };
+
+    var snapX = function snapX(x) {
+      return Math.round(x / slideWidth) * slideWidth;
+    };
+
+    var resize = function resize() {
+      var norm = transform.x / wrapWidth || 0;
+      slideWidth = slides[0].offsetWidth;
+      wrapWidth = slideWidth * numSlides;
+      TweenLite.set(proxy, {
+        x: norm * wrapWidth
+      });
+      animateSlides(0);
+      slideAnimation.progress(1);
+    };
+
+    var wrapPartial = function wrapPartial(min, max) {
+      var r = max - min;
+      return function (value) {
+        var v = value - min;
+        return (r + v % r) % r + min;
+      };
+    };
+
+    for (var i = 0; i < numSlides; i++) {
+      TweenLite.set(slides[i], {
+        xPercent: i * 100
+      });
+    }
+
+    var wrap = wrapPartial(-100, (numSlides - 1) * 100);
+    var timer = TweenLite.delayedCall(slideDelay, autoPlay);
+    var animation = TweenMax.to(slides, 1, {
+      xPercent: "+=" + numSlides * 100,
+      ease: Linear.easeNone,
+      paused: true,
+      repeat: -1,
+      modifiers: {
+        xPercent: wrap
+      }
+    });
+    var proxy = document.createElement("div");
+    TweenLite.set(proxy, {
+      x: "+=0"
+    });
+    var transform = proxy._gsTransform;
+    var slideAnimation = TweenLite.to({}, 0.1, {});
+    var slideWidth = 0;
+    var wrapWidth = 0;
+    resize();
+    var draggable = new Draggable(proxy, {
+      trigger: ".slides-container",
+      throwProps: true,
+      onPress: updateDraggable,
+      onDrag: updateProgress,
+      onThrowUpdate: updateProgress,
+      snap: {
+        x: snapX
+      }
+    });
+    window.addEventListener("resize", resize);
   }
 };
 

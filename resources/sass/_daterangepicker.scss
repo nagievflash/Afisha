@@ -1,0 +1,190 @@
+.daterangepicker {
+    &:before, &:after {
+        content:none;
+    }
+    box-shadow: rgba(0, 0, 0, 0.23) 0px 10px 40px;
+    position: absolute;
+    z-index: 20001;
+    text-rendering: optimizelegibility;
+    -webkit-font-smoothing: antialiased;
+    text-size-adjust: 100%;
+    transform: translateY(0px);
+    opacity: 1;
+    overflow: hidden;
+    background: rgb(255, 255, 255);
+    border-radius: 12px;
+    transition: transform 0.3s ease 0s, opacity;
+    border-radius: 20px;
+    overflow: hidden;
+    .ranges {
+        position: absolute;
+        bottom:100px;
+        width:100%!important;
+        padding: 0 35px;
+        margin:0;
+        ul {
+            width:100%!important;
+            @include flexbox();
+            @include justify-content(flex-start);
+            @include align-items(center);
+            @include flex-direction(row);
+            li {
+                margin-right: 25px;
+                border-radius: 34px;
+                padding: 7px 32px;
+                line-height: 36px;
+                font-size:16px;
+                color: rgba(0, 0, 0, 0.8);
+                background-color:#ffffff;
+                border: 1px solid rgba(195, 195, 195, .6);
+                transition: background-color 0.2s ease 0s;
+                &:hover {
+                    background: rgb(245, 245, 245);
+                }
+                &.active {
+                    background-color: rgb(237, 237, 237);
+                    color: rgba(0, 0, 0, 0.8);
+                }
+            }
+        }
+    }
+    .drp-calendar {
+        max-width:100%;
+        .calendar-table {
+            padding: 25px 15px 30px;
+            .table-condensed {
+                thead {
+                    tr {
+                        th {
+                            padding: 10px 15px;
+                            white-space: nowrap;
+                            text-align: center;
+                            vertical-align: middle;
+                            min-width: 40px;
+                            height: 40px;
+                            font-family: 'Open Sans', sans-serif;
+                            font-size: 16px;
+                            font-weight:400;
+                            line-height: 24px;
+                            border-radius: 4px;
+                            border: 1px solid transparent;
+                            white-space: nowrap;
+                            text-transform: capitalize;
+                            cursor: text;
+                            transition: all 0.3s ease 0s;
+                            &:nth-child(n+6):nth-child(-n+7) {
+                                color: rgba(250, 44, 36, 0.8);
+                            }
+                            &.month {
+                                font-size:18px;
+                                font-weight:600;
+                            }
+                            &.available {
+                                cursor:pointer;
+                                span {
+                                    color: #fff;
+                                    border: solid #696464;
+                                    border-width: 0 2px 2px 0;
+                                    border-radius: 0;
+                                    display: inline-block;
+                                    padding: 6px;
+                                }
+                                &:hover, &:active {
+                                    background:none
+                                }
+                            }
+                        }
+                        &:last-child {
+                            height:54px;
+                            th {
+                                color:rgba(0, 0, 0, 0.5);
+                            }
+                        }
+                    }
+                }
+                tbody {
+                    tr {
+                        td {
+                            padding: 8px 12px;
+                            white-space: nowrap;
+                            text-align: center;
+                            vertical-align: middle;
+                            min-width: 40px;
+                            font-family: 'Open Sans', sans-serif;
+                            font-size: 16px;
+                            font-weight:400;
+                            line-height: 24px;
+                            border-radius: 4px;
+                            border: 1px solid transparent;
+                            white-space: nowrap;
+                            text-transform: capitalize;
+                            cursor: pointer;
+                            transition: all 0.3s ease 0s;
+                            &.in-range {
+                                background-color:rgb(245, 245, 245);
+                            }
+                            &:active, &:hover, &.active, &.active:hover  {
+                                color: rgba(0, 0, 0, 0.8);
+                                background: rgb(227, 227, 227);
+                            }
+                            &.disabled:hover {
+                                cursor:default;
+                                background:none;
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+        &.left {
+            padding-right:30px;
+        }
+    }
+    .drp-buttons {
+        padding:85px 30px 30px;
+        display: block;
+        border-top: none;
+        cursor: pointer;
+        &:hover {
+            .applyBtn {
+                &:not(:disabled) {
+                    background: #9fd2d2
+                }
+            }
+        }
+        .drp-selected {
+            display: inline-block;
+            font-size: 18px;
+            padding-right: 8px;
+            position: absolute;
+            width: 100%;
+            text-align: center;
+            bottom: 49px;
+            font-weight: bold;
+            z-index: 2;
+        }
+        .cancelBtn {
+            display:none;
+        }
+        .applyBtn  {
+            background-color: #ededed;
+            height: 50px;
+            font-weight: bold;
+            color: transparent!important;
+            border: none!important;
+            box-shadow: none!important;
+            padding: 0;
+            transition: background-color 0.2s ease 0s;
+            &:active {
+                background-color: #e2e1e1
+            }
+            &:hover {
+                background-color: #eceaea
+            }
+            &:not(:disabled) {
+                background: #c2e4e4;
+            }
+        }
+    }
+}

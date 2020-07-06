@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 
-class Event extends Model
+class Page extends Model
 {
     /**
      * Таблица, связанная с моделью.
      *
      * @var string
      */
-    protected $table = 'events';
+    protected $table = 'pages';
 
 
     /**
@@ -21,14 +21,6 @@ class Event extends Model
      * @var bool
      */
     public $timestamps = true;
-
-
-    /**
-     * Определяет имя категории.
-     *
-     * @var string
-     */
-    public $categoryName = '';
 
 
     /**
@@ -42,37 +34,11 @@ class Event extends Model
     /**
      * Получить категории.
      */
-    public function categories()
+    public function events()
     {
-        return $this->belongsToMany('App\Category', 'category_event');
+        return $this->belongsToMany('App\Event', 'page_event', 'page_id', 'event_id');
     }
 
-
-    /**
-     * Получить теги.
-     */
-    public function tags()
-    {
-        return $this->belongsToMany('App\Tag', 'tag_event');
-    }
-
-
-    /**
-     * Получить теги.
-     */
-    public function pages()
-    {
-        return $this->belongsToMany('App\Page', 'page_event');
-    }
-
-
-    /**
-     * Получить расписание.
-     */
-    public function schedules()
-    {
-        return $this->morphMany('App\Schedule', 'scheduleable')->orderBy('date', 'asc');
-    }
 
 
     /**
@@ -97,15 +63,4 @@ class Event extends Model
         return $this->belongsTo('App\User', 'author_id', 'id');
     }
 
-
-    /**
-     * Фильтр событий по названию категории.
-     */
-    public function getItemsByCategoryName($name) {
-        $this->categoryName = $name;
-        $items = $this::whereHas('categories', function ($query) {
-            $query->where('name', $this->categoryName);
-        })->get();
-        return $items;
-    }
 }

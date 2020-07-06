@@ -21,9 +21,9 @@
             <div class="row align-items-center">
                 <div class="col-md-4">
                     <div class="row">
-                        <div class="logo">
+                        <a href="/" class="logo" title="Афиша городских мероприятий г. Муравленко">
                             @include('assets.logo')
-                        </div>
+                        </a>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -75,20 +75,7 @@
                     <li><a href="">Контакты</a></li>
                 </ul>
             </div>
-            <div class="row justify-content-stretch top-filter">
-                <div class="form-group search-calendar">
-                    <div class="row no-gutter">
-                        <div class="col">
-                            <div class="input-group">
-                                <input type="text" name="range" value="" placeholder="Выберите дату" class="form-control range-input" />
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text">@include('assets.calendar')</div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            @yield('filter')
         </div>
     </header>
     <div class="main-content">
@@ -139,5 +126,6 @@
             </div>
         </div>
     </footer>
+    @yield('scripts')
 </body>
 </html>

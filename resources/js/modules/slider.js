@@ -213,112 +213,114 @@ var slideset = function slideset() {
 
     var numSlides = slides.length;
 
-    for (var i = 0; i < numSlides; i++) {
-      TweenLite.set(slides[i], {
-        xPercent: i * 100
-      });
-    }
+    if (slides.length > 0) {
+        for (var i = 0; i < numSlides; i++) {
+          TweenLite.set(slides[i], {
+            xPercent: i * 100
+          });
+        }
 
-    var wrap = wrapPartial(-100, (numSlides - 1) * 100);
-    var timer = TweenLite.delayedCall(slideDelay, autoPlay);
+        var wrap = wrapPartial(-100, (numSlides - 1) * 100);
+        var timer = TweenLite.delayedCall(slideDelay, autoPlay);
 
-    var animation = TweenMax.to(slides, 1, {
-      xPercent: "+=" + (numSlides * 100),
-      ease: Linear.easeNone,
-      paused: true,
-      repeat: -1,
-      modifiers: {
-        xPercent: wrap
-      }
-    });
+        var animation = TweenMax.to(slides, 1, {
+          xPercent: "+=" + (numSlides * 100),
+          ease: Linear.easeNone,
+          paused: true,
+          repeat: -1,
+          modifiers: {
+            xPercent: wrap
+          }
+        });
 
-    var proxy = document.createElement("div");
-    TweenLite.set(proxy, { x: "+=0" });
-    var transform = proxy._gsTransform;
-    var slideAnimation = TweenLite.to({}, 0.1, {});
-    var slideWidth = 0;
-    var wrapWidth = 0;
-    resize();
+        var proxy = document.createElement("div");
+        TweenLite.set(proxy, { x: "+=0" });
+        var transform = proxy._gsTransform;
+        var slideAnimation = TweenLite.to({}, 0.1, {});
+        var slideWidth = 0;
+        var wrapWidth = 0;
+        resize();
 
-    var draggable = new Draggable(proxy, {
-      trigger: ".slides-container",
-      throwProps: true,
-      onPress: updateDraggable,
-      onDrag: updateProgress,
-      onThrowUpdate: updateProgress,
-      snap: {
-        x: snapX
-      }
-    });
+        var draggable = new Draggable(proxy, {
+          trigger: ".slides-container",
+          throwProps: true,
+          onPress: updateDraggable,
+          onDrag: updateProgress,
+          onThrowUpdate: updateProgress,
+          snap: {
+            x: snapX
+          }
+        });
 
-    window.addEventListener("resize", resize);
+        window.addEventListener("resize", resize);
 
-    /*prevButton.addEventListener("click", function() {
-      animateSlides(1);
-    });
+        /*prevButton.addEventListener("click", function() {
+          animateSlides(1);
+        });
 
-    nextButton.addEventListener("click", function() {
-      animateSlides(-1);
-    });
-*/
-    function updateDraggable() {
+        nextButton.addEventListener("click", function() {
+          animateSlides(-1);
+        });
+    */
+        function updateDraggable() {
 
-      timer.restart(true);
-      slideAnimation.kill();
-      this.update();
-    }
+          timer.restart(true);
+          slideAnimation.kill();
+          this.update();
+        }
 
-    function animateSlides(direction) {
+        function animateSlides(direction) {
 
-      timer.restart(true);
-      slideAnimation.kill();
+          timer.restart(true);
+          slideAnimation.kill();
 
-      var x = snapX(transform.x + direction * slideWidth);
+          var x = snapX(transform.x + direction * slideWidth);
 
-      slideAnimation = TweenLite.to(proxy, slideDuration, {
-        x: x,
-        onUpdate: updateProgress
-      });
-    }
+          slideAnimation = TweenLite.to(proxy, slideDuration, {
+            x: x,
+            onUpdate: updateProgress
+          });
+        }
 
-    function autoPlay() {
+        function autoPlay() {
 
-      if (draggable.isPressed || draggable.isDragging || draggable.isThrowing) {
-        timer.restart(true);
-      } else {
-        animateSlides(-1);
-      }
-    }
+          if (draggable.isPressed || draggable.isDragging || draggable.isThrowing) {
+            timer.restart(true);
+          } else {
+            animateSlides(-1);
+          }
+        }
 
-    function updateProgress() {
-      animation.progress(transform.x / wrapWidth);
-    }
+        function updateProgress() {
+          animation.progress(transform.x / wrapWidth);
+        }
 
-    function snapX(x) {
-      return Math.round(x / slideWidth) * slideWidth;
-    }
+        function snapX(x) {
+          return Math.round(x / slideWidth) * slideWidth;
+        }
 
-    function resize() {
+        function resize() {
 
-      var norm = (transform.x / wrapWidth) || 0;
+          var norm = (transform.x / wrapWidth) || 0;
 
-      slideWidth = slides[0].offsetWidth;
-      wrapWidth = slideWidth * numSlides;
+          slideWidth = slides[0].offsetWidth;
+          wrapWidth = slideWidth * numSlides;
 
-      TweenLite.set(proxy, {
-        x: norm * wrapWidth
-      });
+          TweenLite.set(proxy, {
+            x: norm * wrapWidth
+          });
 
-      animateSlides(0);
-      slideAnimation.progress(1);
-    }
+          animateSlides(0);
+          slideAnimation.progress(1);
+        }
 
-    function wrapPartial(min, max) {
-      var r = max - min;
-      return function(value) {
-        var v = value - min;
-        return ((r + v % r) % r) + min;
-      }
+        function wrapPartial(min, max) {
+          var r = max - min;
+          return function(value) {
+            var v = value - min;
+            return ((r + v % r) % r) + min;
+          }
+        }
     }
 }
 slideset();

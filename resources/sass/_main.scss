@@ -18,6 +18,14 @@ h1, h2, h3, h4, h5, h6 {
     margin-top: 5px;
     text-align: right;
 }
+.fake-row {
+    margin-left:-15px;
+    margin-right:-15px;
+    width:115%;
+    @include flexbox();
+    @include justify-content(flex-start);
+    @include flex-wrap(wrap);
+}
 .btn {
     border-radius: 40px;
     width:100%;
@@ -43,20 +51,31 @@ h1, h2, h3, h4, h5, h6 {
     position:relative;
 
     input, select  {
-        background-color: #f8f8f8;
+        background-color: #fbfdfd;
         border: none;
         border-radius:20px!important;
         padding:13px 15px 10px;
         padding-left:25px;
         filter:none;
         font-size: 1.2em;
-        box-shadow:none;
+        box-shadow: rgba(193, 193, 193, 0.4) 0px 5px 20px;
         height:auto;
+        transition-duration: 0.3s;
+        transition-property: background, box-shadow, transform;
+        transition-timing-function: ease;
         cursor:text!important;
-        @include placeholder-color(#777);
+        @include placeholder-color(#666);
+        &:hover {
+            box-shadow: rgba(193, 193, 193, 0.7) 0px 5px 20px;
+        }
+        &.range-input {
+            cursor:pointer;
+        }
         &:active, &:focus {
-            border:none;
-            box-shadow:none;
+            transition-duration: 0.15s;
+            box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
+            background: rgba(0, 0, 0, 0.02);
+            outline: 0px;
         }
         @include transitions();
     }

@@ -13,13 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
+Route::get('/', 'HomeController@index')->name('home');
+
+Route::post('/events_loadmore/{offset}', 'HomeController@loadMore')->name('events_loadmore');
+Route::post('/filter', 'GetEventsController@getEventsByFilter');
+Route::get('/filter', 'GetEventsController@index');
 
 Auth::routes();
-
-Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/logout', '\App\Http\Controllers\Auth\LoginController@logout')->name('logout');
 

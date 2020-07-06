@@ -46,9 +46,6 @@ global.imagesLoaded  = require('imagesloaded');
 //slider
 require ('./modules/slider.js');
 
-
-
-
 //custom js
 require ('./custom.js');
 

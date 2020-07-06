@@ -4,15 +4,14 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-
-class Tag extends Model
+class Category extends Model
 {
     /**
      * Таблица, связанная с моделью.
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $table = 'categories';
 
     /**
      * Определяет необходимость отметок времени для модели.
@@ -28,11 +27,5 @@ class Tag extends Model
      */
     protected $guarded = [];
 
-    /**
-     * Получить теги.
-     */
-    public function tags()
-    {
-        return $this->belongsToMany('App\Tag', 'tag_event');
-    }
+
 }

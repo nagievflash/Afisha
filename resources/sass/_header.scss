@@ -19,15 +19,19 @@ header {
                 height:auto;
                 cursor:text!important;
                 @include placeholder-color(#777);
+                &:hover {
+                    box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
+                }
                 &:active, &:focus {
                     border:none;
+                    box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
                 }
                 @include transitions();
             }
             .input-group-prepend {
                 position: absolute;
                 right: 3px;
-                top: 10px;
+                top: 13px;
                 z-index: 3;
                 .input-group-text {
                     background-color:transparent;
@@ -122,6 +126,39 @@ header {
         margin-top:32px;
         .search-calendar {
             margin-bottom:0;
+            width:100%;
+            .filter-wrapper {
+                .filter-button {
+                    background-color: #fbfdfd;
+                    border: none;
+                    border-radius: 20px !important;
+                    padding: 13px 15px 10px;
+                    padding-left: 25px;
+                    margin-left:25px;
+                    -webkit-filter: none;
+                    filter: none;
+                    font-size: 1.2em;
+                    box-shadow: rgba(193, 193, 193, 0.4) 0px 5px 20px;
+                    height: auto;
+                    transition-duration: 0.3s;
+                    transition-property: background, box-shadow, transform;
+                    transition-timing-function: ease;
+                    cursor: pointer !important;
+                    transition: 0.3s ease-in-out all;
+                    min-width:178px;
+                    text-decoration: none;
+                    a {
+                        color: #6c737a!important;
+                        text-decoration: none;
+                    }
+                        &:hover, &:active {
+                            transition-duration: 0.15s;
+                            box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
+                            background: rgba(0, 0, 0, 0.02);
+                            outline: 0px;
+                        }
+                }
+            }
         }
     }
 }
