@@ -1,16 +1,16 @@
 .hero-slider {
 	position: relative;
 	width: 100%;
-	height: 443px;
-	margin-bottom: 100px;
+	height: 476px;
+	margin-bottom: 120px;
 }
 .slider-wall {
-	position:absolute;
-	top:18px;
-	right:0;
-	width:calc(1060px + (100vw - 1200px)/2);
-	height:766px;
-	z-index:1;
+	position: absolute;
+    top: -8px;
+    right: 0;
+    width: calc(1060px + (100vw - 1200px)/2);
+    height: 835px;
+    z-index: 1;
 	img {
 		width:100%;
 		height:100%;
@@ -23,6 +23,7 @@
 }
 
 #slider {
+	z-index: 1;
 	width: 100%;
 	max-width: 1200px;
 	height: 100%;
@@ -89,7 +90,8 @@
 				height:38px;
 				line-height:40px;
 				background-image:url('/css/icons/age-restrictions.svg');
-				background-size:cover;
+				background-size:contain;
+				background-repeat: no-repeat;
 				text-align: center;
 				position: absolute;
 				left: -70px;
@@ -165,30 +167,6 @@
 					}
 				}
 			}
-			.event__accept {
-				width:300px;
-				padding:15px 30px 13px;
-				background: linear-gradient(28.82deg, #FF6868 20.7%, #FFCA6A 75.17%);
-				border-radius: 40px;
-				position:relative;
-				cursor:pointer;
-				margin-right:25px;
-
-				.event-accept {
-					font-size:18px;
-					font-weight:bold;
-				}
-
-				.event-angle {
-					position: absolute;
-					right: 30px;
-					top: 17px;
-				}
-
-				&:hover {
-					text-decoration:none;
-				}
-			}
 			.add-to-wishlist {
 				background: rgba(255,255,255,.2);
 				border-radius: 100%;
@@ -208,9 +186,12 @@
 						fill:#fff;
 					}
 				}
-				&:hover {
-					background-color: #FF6868;
-				}
+
+			    &:hover {
+			        svg {
+			            transform:scale(1.2);
+			        }
+			    }
 			}
 		}
 	}

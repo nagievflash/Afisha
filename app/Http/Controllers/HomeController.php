@@ -26,13 +26,22 @@ class HomeController extends Controller
     public function index()
     {
         $items = new Events;
-        $concerts = $items->getItemsByCategoryName('Концерты')->where('status', 'PUBLISHED');
-        $sports = $items->getItemsByCategoryName('Спорт')->where('status', 'PUBLISHED');
-        $events = Events::limit(6)->where('status', 'PUBLISHED')->get();
+        $concerts = $items->getItemsByCategoryName('Концерты')
+        ->where('status', 'PUBLISHED');
+
+        $sports = $items->getItemsByCategoryName('Спорт')
+        ->where('status', 'PUBLISHED');
+
+        $events = Events::limit(6)
+        ->whereHas('schedules', function($query) {
+            $query->where('date', '>', date("Y-m-d"));
+        })->where('status', 'PUBLISHED')->get();
+
         $slider = Pages::where('slug', '=', 'home')->first();
+        $bodyClass = 'homepage';
 
 
-        return view('home', compact('events', 'concerts', 'sports', 'slider'));
+        return view('home', compact('events', 'concerts', 'sports', 'slider', 'bodyClass'));
     }
 
     public function loadMore($offset) {
@@ -50,4 +59,5 @@ class HomeController extends Controller
         return $items;
 
     }
+
 }

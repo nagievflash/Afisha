@@ -2,6 +2,48 @@
 
 @section('title', 'Главная')
 
+
+@php
+    $todayLink = "filter?from=" . Date::parse('today')->format('Y-m-d') . "&to=" . Date::parse('today')->format('Y-m-d');
+    $tomorrowLink = "filter?from=" . Date::parse('now')->add('1 day')->format('Y-m-d') . "&to=" . Date::parse('now')->add('1 day')->format('Y-m-d');
+
+    $weekday = Date::parse('now')->format('N');
+    $weekendLink = '';
+    if ($weekday < 6) {
+        $weekendLink = "filter?from=" . Date::parse('now')->add((6 - $weekday).' day')->format('Y-m-d') . "&to=" . Date::parse('now')->add((7 - $weekday).' day')->format('Y-m-d');
+        $weekendFrom = Date::parse('now')->add((6 - $weekday).' day')->format('Y-m-d');
+        $weekendTo = Date::parse('now')->add((7 - $weekday).' day')->format('Y-m-d');
+    }
+    elseif ($weekday == 6) {
+        $weekendLink = "filter?from=" . Date::parse('now')->format('Y-m-d') . "&to=" . Date::parse('now')->add((7 - $weekday).' day')->format('Y-m-d');
+        $weekendFrom = Date::parse('now')->format('Y-m-d');
+        $weekendTo = Date::parse('now')->add((7 - $weekday).' day')->format('Y-m-d');
+    }
+    else {
+        $weekendLink = $todayLink;
+        $weekendFrom = Date::parse('today')->format('Y-m-d');
+        $weekendTo = Date::parse('today')->format('Y-m-d');
+    }
+
+    $uri_from = Date::parse($from)->format('Y-m-d');
+    $uri_to = Date::parse($to)->format('Y-m-d');
+
+    $todayClass = $tomorrowClass = $weekendClass = "";
+
+    if (($uri_from == $uri_to) && ($uri_from == Date::parse('today')->format('Y-m-d'))) {
+        $todayClass = "active";
+    }
+
+    if (($uri_from == $uri_to) && ($uri_from == Date::parse('now')->add('1 day')->format('Y-m-d'))) {
+        $tomorrowClass = "active";
+    }
+    if (($uri_from == $weekendFrom) && ($uri_to == $weekendTo)) {
+        $weekendClass = "active";
+    }
+
+
+@endphp
+
 @section('filter')
 
 <div class="row justify-content-stretch top-filter">
@@ -15,13 +57,13 @@
                     </div>
                 </div>
                 <div class="filter-button">
-                    <a data-range="today">Сегодня</a>
+                    <a class="{{$todayClass}}" data-range="today" href="{{$todayLink}}">Сегодня</a>
                 </div>
                 <div class="filter-button">
-                    <a data-range="tomorrow">Завтра</a>
+                    <a class="{{$tomorrowClass}}" data-range="tomorrow" href="{{$tomorrowLink}}">Завтра</a>
                 </div>
                 <div class="filter-button">
-                    <a data-range="weekend">В выходные</a>
+                    <a class="{{$weekendClass}}" data-range="weekend" href="{{$weekendLink}}">В выходные</a>
                 </div>
             </div>
         </div>
@@ -40,37 +82,7 @@
                 <div class="row">
                     <div class="fake-row">
                         @foreach ($events as $event)
-                        @php
-                            $schedule = $event->schedules()->get();
-                            if ($schedule->first()):
-                                $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
-                        @endphp
-                        <div class="col-md-4 item">
-                            <a href="/events/{{$event->slug}}" class="item-price d-none"></a>
-
-                            <div class="item-wrapper">
-                                <div class="item-background" style="background-image:url({{ Voyager::image($event->image)}})"></div>
-                                <div class="item-image">
-                                    <div class="item-header d-flex justify-content-between">
-                                        <div class="item-tags">
-                                            @foreach ($event->tags as $tag)
-                                            <a class="item-tag" href="/tags/{{ $tag->slug}}">#{{$tag->title}}</a>
-                                            @endforeach
-                                        </div>
-                                        <div class="item-wishlist">@include('assets.wishlist-outline')</div>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">{{$event->title}}</h3>
-                                    <div class="item-info d-flex justify-content-between">
-
-                                        <div class="item-date">@include('assets.calendar')<span>{{ $date }}</span></div>
-                                        <div class="item-location">@include('assets.location')<span>{{ $event->location }}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+                        @include('modules.events', array('event' => $event))
                         @endforeach
                     </div>
                 </div>
@@ -81,11 +93,6 @@
 
 @section('scripts')
     <script>
-        var items = document.getElementsByClassName('item');
-        Array.prototype.forEach.call(items, function (timestamp) {
-            timestamp.addEventListener("click", function(){
-                this.getElementsByClassName('item-price')[0].click();
-            })
-        });
+
     </script>
 @endsection

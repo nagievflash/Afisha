@@ -1,8 +1,27 @@
 @extends('layouts.app')
 
-@section('title', 'Главная')
+@section('title', 'Афиша городских мероприятий города Муравленко')
+
+@php
+    $todayLink = "filter?from=" . Date::parse('today')->format('Y-m-d') . "&to=" . Date::parse('today')->format('Y-m-d');
+    $tomorrowLink = "filter?from=" . Date::parse('now')->add('1 day')->format('Y-m-d') . "&to=" . Date::parse('now')->add('1 day')->format('Y-m-d');
+
+    $weekday = Date::parse('now')->format('N');
+    $weekendLink = '';
+    if ($weekday < 6) {
+        $weekendLink = "filter?from=" . Date::parse('now')->add((6 - $weekday).' day')->format('Y-m-d') . "&to=" . Date::parse('now')->add((7 - $weekday).' day')->format('Y-m-d');
+    }
+    elseif ($weekday == 6) {
+        $weekendLink = "filter?from=" . Date::parse('now')->format('Y-m-d') . "&to=" . Date::parse('now')->add((7 - $weekday).' day')->format('Y-m-d');
+    }
+    else {
+        $weekendLink = $todayLink;
+    }
+
+@endphp
 
 @section('filter')
+
 
 <div class="row justify-content-stretch top-filter">
     <div class="form-group search-calendar">
@@ -15,13 +34,13 @@
                     </div>
                 </div>
                 <div class="filter-button">
-                    <a data-range="today">Сегодня</a>
+                    <a data-range="today" href="{{$todayLink}}">Сегодня</a>
                 </div>
                 <div class="filter-button">
-                    <a data-range="tomorrow">Завтра</a>
+                    <a data-range="tomorrow" href="{{$tomorrowLink}}">Завтра</a>
                 </div>
                 <div class="filter-button">
-                    <a data-range="weekend">В выходные</a>
+                    <a data-range="weekend" href="{{$weekendLink}}">В выходные</a>
                 </div>
             </div>
         </div>
@@ -35,111 +54,7 @@
     </div>
 
     <div class="hero-slider">
-
-        <div id="slider">
-            <div class="slider-inner">
-                <div id="slider-content">
-                    @foreach ($slider->events as $event)
-                    @php
-                        $schedule = $event->schedules()->get();
-                        if ($schedule->first()) {
-                            $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
-                        }
-                    @endphp
-                     @if ($loop->first)
-                    <div id="slide">
-                        <div class="slide-header">
-                            <div class="event__age-restriction"><span>{{$event->age}}</span></div>
-                            <div class="event__type"><span>@include('assets.melodic')</span> Мюзикл</div>
-                            <div class="event__tags">
-                                @foreach ($event->tags as $tag)
-                                <a href="/tags/{{ $tag->slug}}" class="event__tag">#{{$tag->title}}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="slide-content">
-                            <div class="event__title"><h2>{{$event->title}}</h2></div>
-                            <div class="event__description"><p>{{$event->excerpt}}</p></div>
-                        </div>
-                        <div class="slide-footer">
-                            <div class="col">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <div class="row">
-
-                                            <div class="event__date"><span class="icon-calendar">@include('assets.calendar')</span>{{ $date }}</div>
-                                            <div class="event__location"><span class="icon-location">@include('assets.location')</span>{{$event->location}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <a href="/events/{{$event->slug}}" class="event__accept ml-auto">
-                                                <span class="event-accept">Пойти</span>
-                                                <span class="event-angle">@include('assets.angle')</span>
-                                            </a>
-                                            <div class="event__add-wishlist"><a href="#" class="add-to-wishlist" title="Добавить в избранное">@include('assets.wishlist-outline')</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endif
-                    <div data-slide-content="{{$loop->index}}">
-                        <div class="slide-header">
-                            <div class="event__age-restriction"><span>{{$event->age}}</span></div>
-                            <div class="event__type"><span>@include('assets.melodic')</span> Мюзикл</div>
-                            <div class="event__tags">
-                                @foreach ($event->tags as $tag)
-                                <a href="/tags/{{ $tag->slug}}" class="event__tag">#{{$tag->title}}</a>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div class="slide-content">
-                            <div class="event__title"><h2>{{$event->title}}</h2></div>
-                            <div class="event__description"><p>{{$event->excerpt}}</p></div>
-                        </div>
-                        <div class="slide-footer">
-                            <div class="col">
-                                <div class="row align-items-center">
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <div class="event__date"><span class="icon-calendar">@include('assets.calendar')</span>{{$date}}</div>
-                                            <div class="event__location"><span class="icon-location">@include('assets.location')</span>{{$event->location}}</div>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <div class="row">
-                                            <a href="/events/{{$event->slug}}" class="event__accept ml-auto">
-                                                <span class="event-accept">Пойти</span>
-                                                <span class="event-angle">@include('assets.angle')</span>
-                                            </a>
-                                            <div class="event__add-wishlist"><a href="#" class="add-to-wishlist" title="Добавить в избранное">@include('assets.wishlist-outline')</a></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-                </div>
-            </div>
-
-            @foreach ($slider->events as $event)
-                <img src="{{Voyager::image( $event->slider_image )}}" />
-            @endforeach
-
-            <div id="pagination">
-            @foreach ($slider->events as $event)
-                @if ($loop->first)
-                <button class="active" data-slide="0"></button>
-                @else
-                <button data-slide="{{$loop->index}}"></button>
-                @endif
-            @endforeach
-            </div>
-        </div>
+        @include('modules.slider', array('slider' => $slider))
     </div>
     <section id="concert">
         <div class="section-title text-center">
@@ -149,51 +64,15 @@
             <div class="container">
                 <div class="row">
                     <div class="fake-row">
-                        @foreach ($concerts as $concert)
-                        @php
-                            $schedule = $concert->schedules()->get();
-                            if ($schedule->first()):
-                                $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
-                                $price = $schedule->first()->price;
-                                if ($price && $price != 0) {
-                                    $price .= ' Рублей';
-                                }
-                                else $price = false;
-                        @endphp
-                        <div class="col-md-4 item">
-                            @if ($price)
-                            <a href="/events/{{ $concert->slug }}" class="item-price">{{ $price }}</a>
-                            @else
-                            <a href="/events/{{ $concert->slug }}" class="item-price d-none"></a>
-                            @endif
-                            <div class="item-wrapper">
-                                <div class="item-background" style="background-image:url({{ Voyager::image( $concert->image ) }})"></div>
-                                <div class="item-image">
-                                    <div class="item-header d-flex justify-content-between">
-                                        <div class="item-tags">
-                                            @foreach ($concert->tags as $tag)
-                                            <a class="item-tag" href="/tags/{{ $tag->slug}}">#{{$tag->title}}</a>
-                                            @endforeach
-                                        </div>
-                                        <div class="item-wishlist">@include('assets.wishlist-outline')</div>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">{{ $concert->title }}</h3>
-                                    <div class="item-info d-flex justify-content-between">
-                                        <div class="item-date">@include('assets.calendar')<span>{{ $date }}</span></div>
-                                        <div class="item-location">@include('assets.location')<span>{{ $concert->location }}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+                        @foreach ($concerts as $event)
+                        @include('modules.events', array('event' => $event))
                         @endforeach
                     </div>
                 </div>
             </div>
         </div>
     </section>
+    <!--
     <section id="movies">
         <div class="section-title text-center">
             <h2>Сегодня в кино</h2>
@@ -207,7 +86,7 @@
                             <div class="item-background" style="background-image:url(/images/x1000.webp)"></div>
                             <div class="item-image">
                                 <div class="item-header d-flex justify-content-end">
-                                    <div class="item-wishlist">@include('assets.wishlist-outline')</div>
+                                    @include('modules.add-to-wishlist', array('event_id' => $event->id))
                                 </div>
                             </div>
                             <div class="item-content">
@@ -224,7 +103,7 @@
                             <div class="item-background" style="background-image:url(/images/likvidators.webp)"></div>
                             <div class="item-image">
                                 <div class="item-header d-flex justify-content-end">
-                                    <div class="item-wishlist">@include('assets.wishlist-outline')</div>
+                                    @include('modules.add-to-wishlist', array('event_id' => $event->id))
                                 </div>
                             </div>
                             <div class="item-content">
@@ -241,7 +120,7 @@
                             <div class="item-background" style="background-image:url(/images/portie.webp)"></div>
                             <div class="item-image">
                                 <div class="item-header d-flex justify-content-end">
-                                    <div class="item-wishlist">@include('assets.wishlist-outline')</div>
+                                    @include('modules.add-to-wishlist', array('event_id' => $event->id))
                                 </div>
                             </div>
                             <div class="item-content">
@@ -258,7 +137,7 @@
                             <div class="item-background" style="background-image:url(/images/nimani.webp)"></div>
                             <div class="item-image">
                                 <div class="item-header d-flex justify-content-end">
-                                    <div class="item-wishlist">@include('assets.wishlist-outline')</div>
+                                    @include('modules.add-to-wishlist', array('event_id' => $event->id))
                                 </div>
                             </div>
                             <div class="item-content">
@@ -275,7 +154,24 @@
                             <div class="item-background" style="background-image:url(/images/bilal.webp)"></div>
                             <div class="item-image">
                                 <div class="item-header d-flex justify-content-end">
-                                    <div class="item-wishlist">@include('assets.wishlist-outline')</div>
+                                    @include('modules.add-to-wishlist', array('event_id' => $event->id))
+                                </div>
+                            </div>
+                            <div class="item-content">
+                                <h3 class="item-title">KHRUANGBIN</h3>
+                                <div class="item-info d-flex justify-content-between">
+                                    <div class="item-date">@include('assets.calendar')<span>c 30 сентября</span></div>
+                                    <div class="item-location">@include('assets.location')<span>ГДК «Украина»</span></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="slide">
+                        <div class="item-wrapper">
+                            <div class="item-background" style="background-image:url(/images/bilal.webp)"></div>
+                            <div class="item-image">
+                                <div class="item-header d-flex justify-content-end">
+                                    @include('modules.add-to-wishlist', array('event_id' => $event->id))
                                 </div>
                             </div>
                             <div class="item-content">
@@ -292,6 +188,7 @@
 
         </div>
     </section>
+-->
     <section id="promo" style="background-image:url(/images/karenina.webp)">
         <div class="container">
             <div class="promo-header">
@@ -323,7 +220,7 @@
                                     <span class="event-accept">Пойти</span>
                                     <span class="event-angle">@include('assets.angle')</span>
                                 </a>
-                                <div class="event__add-wishlist"><a href="#" class="add-to-wishlist" title="Добавить в избранное">@include('assets.wishlist-outline')</a></div>
+                                <div class="event__add-wishlist">@include('modules.add-to-wishlist', array('event_id' => $event->id))</div>
                             </div>
                         </div>
                     </div>
@@ -340,37 +237,7 @@
                 <div class="row">
                     <div class="fake-row">
                         @foreach ($events as $event)
-                        @php
-                            $schedule = $event->schedules()->get();
-                            if ($schedule->first()):
-                                $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
-                        @endphp
-                        <div class="col-md-4 item">
-                            <a href="/events/{{$event->slug}}" class="item-price d-none"></a>
-
-                            <div class="item-wrapper">
-                                <div class="item-background" style="background-image:url({{ Voyager::image($event->image)}})"></div>
-                                <div class="item-image">
-                                    <div class="item-header d-flex justify-content-between">
-                                        <div class="item-tags">
-                                            @foreach ($event->tags as $tag)
-                                            <a class="item-tag" href="/tags/{{ $tag->slug}}">#{{$tag->title}}</a>
-                                            @endforeach
-                                        </div>
-                                        <div class="item-wishlist">@include('assets.wishlist-outline')</div>
-                                    </div>
-                                </div>
-                                <div class="item-content">
-                                    <h3 class="item-title">{{$event->title}}</h3>
-                                    <div class="item-info d-flex justify-content-between">
-
-                                        <div class="item-date">@include('assets.calendar')<span>{{ $date }}</span></div>
-                                        <div class="item-location">@include('assets.location')<span>{{ $event->location }}</span></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endif
+                        @include('modules.events', array('event' => $event))
                         @endforeach
                     </div>
                 </div>
@@ -388,12 +255,6 @@
 
 @section('scripts')
     <script>
-        var items = document.getElementsByClassName('item');
-        Array.prototype.forEach.call(items, function (timestamp) {
-            timestamp.addEventListener("click", function(){
-                this.getElementsByClassName('item-price')[0].click();
-            })
-        });
 
         function eventReadmore(e) {
             post = e.dataset.post;

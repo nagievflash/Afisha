@@ -12,7 +12,7 @@ header {
                 border: none;
                 border-radius:20px;
                 padding:13px 15px 10px;
-                padding-left:25px;
+                padding-left:35px;
                 filter:none;
                 font-size: 1.2em;
                 box-shadow:none;
@@ -31,12 +31,89 @@ header {
             .input-group-prepend {
                 position: absolute;
                 right: 3px;
-                top: 13px;
+                top: 9px;
                 z-index: 3;
                 .input-group-text {
                     background-color:transparent;
                     border:none;
 
+                }
+            }
+        }
+        #search-results {
+            display: none;
+            position: absolute;
+            width: 100%;
+            padding: 12px 0;
+            top: 60px;
+            z-index: 999999999999;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: rgba(0, 0, 0, 0.24) 0px 10px 40px;
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li {
+                    padding:4px 40px;
+                    white-space: normal;
+                    cursor: pointer;
+                    opacity: 0.8;
+                    &:hover {
+                        opacity:1;
+                    }
+                    a {
+                        display: inline-block;
+                        width: 100%;
+                        text-decoration: none;
+                        padding: 4px 0px;
+                        font-size:18px;
+                        color:#000;
+                        &.search-link {
+                            color:#166ebe;
+                        }
+                    }
+                }
+            }
+            .spinner-wrapper {
+                @include flexbox();
+                -webkit-box-pack: center;
+                @include justify-content(center);
+                @include align-items(center);
+                padding: 25px;
+                .spinner {
+                    display: block;
+                    position: relative;
+                    width: 26px;
+                    height: 26px;
+                    animation: 1s linear 0s infinite normal none running rotating;
+                    span {
+                        width: 100%;
+                        height: 100%;
+                        display: block;
+                        position: absolute;
+                        top: 0px;
+                        left: 50%;
+                        overflow: hidden;
+                        padding: 0px;
+                        margin: 0px;
+                        &:before {
+                            content: "";
+                            width: 100%;
+                            height: 100%;
+                            display: block;
+                            box-sizing: border-box;
+                            position: absolute;
+                            top: 0px;
+                            left: -50%;
+                            border-radius: 100%;
+                            border-style: solid;
+                            border-width: 2px;
+                            border-color: rgb(254, 243, 57);
+                            padding: 0px;
+                            margin: 0px;
+                        }
+                    }
                 }
             }
         }
@@ -107,7 +184,8 @@ header {
         .main-menu {
             margin-top:35px;
             li {
-                margin-right: 35px;
+                margin-right: 40px;
+                overflow:hidden;
                 &:last-child {
                     margin-right:0;
                 }
@@ -118,6 +196,23 @@ header {
                     text-transform: uppercase;
                     text-decoration: none;
                     letter-spacing: .03em;
+                    position:relative;
+                    &:before {
+                        content:'';
+                        position:absolute;
+                        transform:translateX(-100px);
+                        width:100%;
+                        bottom:0;
+                        height:2px;
+                        background-color:#333;
+                        transition:.2s ease-in all;
+                    }
+                }
+                &:hover a {
+                    color:#333;
+                    &:before {
+                        transform: translateX(0);
+                    }
                 }
             }
         }
@@ -132,8 +227,6 @@ header {
                     background-color: #fbfdfd;
                     border: none;
                     border-radius: 20px !important;
-                    padding: 13px 15px 10px;
-                    padding-left: 25px;
                     margin-left:25px;
                     -webkit-filter: none;
                     filter: none;
@@ -147,9 +240,20 @@ header {
                     transition: 0.3s ease-in-out all;
                     min-width:178px;
                     text-decoration: none;
+                    overflow:hidden;
                     a {
-                        color: #6c737a!important;
+                        color: #6c737a !important;
                         text-decoration: none;
+                        text-align: left;
+                        width: 100%;
+                        height:100%;
+                        display: block;
+                        padding: 12px 12px 10px 25px;
+                        &.active {
+                            font-weight: 600;
+                            background: rgb(118, 113, 113);
+                            color: #fff!important;
+                        }
                     }
                         &:hover, &:active {
                             transition-duration: 0.15s;
@@ -161,4 +265,17 @@ header {
             }
         }
     }
+}
+
+@-webkit-keyframes rotating {
+  from {
+    -webkit-transform: rotate(0deg);
+    -o-transform: rotate(0deg);
+    transform: rotate(0deg);
+  }
+  to {
+    -webkit-transform: rotate(360deg);
+    -o-transform: rotate(360deg);
+    transform: rotate(360deg);
+  }
 }

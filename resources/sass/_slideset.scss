@@ -1,12 +1,12 @@
 #movies {
     margin-top:60px;
+    padding-top:60px;
     .slideset {
         display: flex;
         position: relative;
         flex-direction: column;
         width: 100%;
         height: 605px;
-        padding-left: calc((100vw - 1240px) / 2);
         .slides-container {
             position: relative;
             display: flex;
@@ -29,6 +29,10 @@
                     height: 100%;
                     width: 410px;
                     padding:0 15px;
+                    cursor:grab!important;
+                    &:focus, &:active {
+                        cursor:grabbing!important
+                    }
 
                     .item-wrapper {
                         width: 100%;
@@ -95,7 +99,7 @@
                             line-height: 150%;
                             margin-bottom:7px;
                             color:#6A515E;
-                            cursor:pointer
+                            cursor:pointer;
                         }
                         .item-info {
                             font-size:14px;

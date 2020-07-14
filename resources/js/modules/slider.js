@@ -173,9 +173,14 @@ const displacementSlider = function(opts) {
 
         });
 
+
     };
 
     addEvents();
+
+
+
+
 
     window.addEventListener( 'resize' , function(e) {
         renderer.setSize(renderW, renderH);
@@ -201,6 +206,7 @@ imagesLoaded( document.querySelectorAll('img'), () => {
     });
 
 });
+
 
 //slideset
 var slideset = function slideset() {

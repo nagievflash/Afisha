@@ -4,6 +4,13 @@
     padding:80px;
     position: relative;
     border-radius: 40px 0 0 40px;
+    p {
+        font-size: 18px;
+        padding-right: 25px;
+        line-height: 1.2;
+        color: #777;
+        margin-bottom: 0;
+    }
     &:before {
         content:'';
         position: absolute;

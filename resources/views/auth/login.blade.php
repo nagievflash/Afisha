@@ -54,6 +54,9 @@
                                     {{ __('Восстановить пароль?') }}
                                 </a>
                             @endif
+                            <a class="btn btn-link" href="{{ route('register') }}">
+                                Зарегистрироваться
+                            </a>
                         </div>
                     </form>
                 </div>

@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Jenssegers\Date\Date;
 use Illuminate\Database\Eloquent\Relations\Relation;
+use Illuminate\Contracts\View\View;
 
 
 class AppServiceProvider extends ServiceProvider
@@ -32,5 +33,6 @@ class AppServiceProvider extends ServiceProvider
          Relation::morphMap([
             'events' => 'App\Event',
         ]);
+
      }
 }

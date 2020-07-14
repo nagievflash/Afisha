@@ -26,7 +26,15 @@ class GetEventsController extends Controller
     }
 
 
-    public function index(Request $request) {
+    public function index($slug) {
+        $event = Events::where('slug', $slug)
+        ->get()->first();
+        $bodyClass = 'event';
+        $similiarEvents = $this->getSimiliarEvents($slug);
+        return view('event', compact('event', 'bodyClass', 'similiarEvents'));
+    }
+
+    public function showEventsByFilter(Request $request) {
         $events = $this->getEventsByFilter($request);
         $from = Date::parse($this->daterange[0])->format('d F');
         $to = Date::parse($this->daterange[1])->format('d F');
@@ -42,8 +50,9 @@ class GetEventsController extends Controller
                 $dateTitle = Date::parse($from)->format('j F').' – '.Date::parse($to)->format('j F');
             }
         }
+        $bodyClass = 'filter';
 
-        return view('filter', compact('events', 'from', 'to', 'dateTitle'));
+        return view('filter', compact('events', 'from', 'to', 'dateTitle', 'bodyClass'));
     }
 
     public function getEventsByFilter(Request $request) {
@@ -68,5 +77,12 @@ class GetEventsController extends Controller
         }
 
         return $this->filter->get();
+    }
+
+    public function getSimiliarEvents($slug) {
+        return Events::where('slug', '!=', $slug)
+            ->whereHas('schedules', function($query) {
+                $query->where('date', '>', date("Y-m-d"));
+            })->take(6)->get();
     }
 }

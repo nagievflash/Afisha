@@ -4,9 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use TCG\Voyager\Traits\Resizable;
 
 class Event extends Model
 {
+    use Resizable;
     /**
      * Таблица, связанная с моделью.
      *
@@ -76,6 +78,15 @@ class Event extends Model
 
 
     /**
+     * Получить заказы.
+     */
+    public function orders()
+    {
+        return $this->hasMany('App\Order');
+    }
+
+
+    /**
      * Событие перед сохранением события Voyager.
      */
     public function save(array $options = [])
@@ -105,6 +116,8 @@ class Event extends Model
         $this->categoryName = $name;
         $items = $this::whereHas('categories', function ($query) {
             $query->where('name', $this->categoryName);
+        })->whereHas('schedules', function($query) {
+            $query->where('date', '>', date("Y-m-d"));
         })->get();
         return $items;
     }

@@ -17,7 +17,19 @@ Route::get('/', 'HomeController@index')->name('home');
 
 Route::post('/events_loadmore/{offset}', 'HomeController@loadMore')->name('events_loadmore');
 Route::post('/filter', 'GetEventsController@getEventsByFilter');
-Route::get('/filter', 'GetEventsController@index');
+Route::post('/add-to-wishlist', 'WishlistController@addToWishlist');
+Route::get('/filter', 'GetEventsController@showEventsByFilter');
+Route::get('/events/{slug}', 'GetEventsController@index');
+Route::get('/profile', 'ProfileController@index')->name('profile');
+Route::post('/profile', 'ProfileController@update')->name('profileUpdate');
+Route::post('/search', 'SearchController@show');
+Route::get('/search/{request}', 'SearchController@index')->name('search');
+
+Route::resource('wishlist', 'WishlistController', [
+    'names' => [
+        'index' => 'wishlist'
+    ]
+]);;
 
 Auth::routes();
 

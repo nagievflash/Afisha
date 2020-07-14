@@ -36,4 +36,22 @@ class User extends \TCG\Voyager\Models\User
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * Получить теги.
+     */
+    public function wishlist()
+    {
+        return $this->belongsToMany('App\Event', 'user_event');
+    }
+
+    /**
+     * Список желаний.
+     */
+    public function getWishlist()
+    {
+        return $this->wishlist()->whereHas('schedules', function($query) {
+            $query->where('date', '>', date("Y-m-d"));
+        })->get();
+    }
 }
