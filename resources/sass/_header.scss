@@ -217,54 +217,7 @@ header {
             }
         }
     }
-    .top-filter {
-        margin-top:32px;
-        .search-calendar {
-            margin-bottom:0;
-            width:100%;
-            .filter-wrapper {
-                .filter-button {
-                    background-color: #fbfdfd;
-                    border: none;
-                    border-radius: 20px !important;
-                    margin-left:25px;
-                    -webkit-filter: none;
-                    filter: none;
-                    font-size: 1.2em;
-                    box-shadow: rgba(193, 193, 193, 0.4) 0px 5px 20px;
-                    height: auto;
-                    transition-duration: 0.3s;
-                    transition-property: background, box-shadow, transform;
-                    transition-timing-function: ease;
-                    cursor: pointer !important;
-                    transition: 0.3s ease-in-out all;
-                    min-width:178px;
-                    text-decoration: none;
-                    overflow:hidden;
-                    a {
-                        color: #6c737a !important;
-                        text-decoration: none;
-                        text-align: left;
-                        width: 100%;
-                        height:100%;
-                        display: block;
-                        padding: 12px 12px 10px 25px;
-                        &.active {
-                            font-weight: 600;
-                            background: rgb(118, 113, 113);
-                            color: #fff!important;
-                        }
-                    }
-                        &:hover, &:active {
-                            transition-duration: 0.15s;
-                            box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
-                            background: rgba(0, 0, 0, 0.02);
-                            outline: 0px;
-                        }
-                }
-            }
-        }
-    }
+
 }
 
 @-webkit-keyframes rotating {
@@ -278,4 +231,164 @@ header {
     -o-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+
+@include media-breakpoint-down(sm) {
+    header {
+        display:none;
+    }
+    header.mobile {
+        z-index:99999;
+        padding-top: 0px;
+        display: block!important;
+
+        .top-menu {
+            padding: 15px 30px;
+            background: linear-gradient(28.82deg, #db8888 20.7%, #4874a5 75.17%);
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            width:100vw;
+            .header-top-icons {
+                width:100%;
+                .hamburger-menu {
+                    flex-grow: 2;
+                    .hamburger {
+                        height:28px;
+                        width:44px;
+                        display:block;
+                        span {
+                            width:44px;
+                            height:4px;
+                            background-color: #fff;
+                            transition:.25s ease-in-out all;
+                            border-radius: 2px;
+                            transform-origin: center;
+                            &:first-child {
+                                width:85%;
+                            }
+                            &:last-child {
+                                width:65%;
+                            }
+
+                        }
+
+                    }
+                }
+                .icon {
+                    background: #fff;
+                    border-radius: 100%;
+                    width: 38px;
+                    height: 38px;
+                    padding: 0;
+                    margin-right:40px;
+                    position: relative;
+                    &.wishlist-icon {
+                        svg {
+                            margin:0;
+                        }
+                        span {
+                            position: absolute;
+                            right: -10px;
+                            top: -2px;
+                            font-size: 12px;
+                            border-radius: 100%;
+                            background: #337fd5;
+                            color: #fff;
+                            width: 18px;
+                            height: 19px;
+                            text-align: center;
+                            padding-left: 1px;
+                            margin: 0;
+                            line-height: 21px;
+                        }
+                    }
+                }
+            }
+        }
+
+
+        a.logo-mobile {
+            margin:0 auto;
+            padding: 15px;
+            svg {
+                width:80px;
+            }
+        }
+        a.logo {
+            display:none;
+        }
+        .container>.row {
+            flex-direction: column-reverse;
+        }
+        .search-wrapper {
+            display:none;
+        }
+
+        .top-filter {
+            max-width: 100vw;
+            overflow: auto;
+            padding: 25px 0;
+            margin: 0;
+            .search-calendar {
+                margin-bottom: 0;
+                width: auto;
+            }
+        }
+
+    }
+
+    .logo-wrapper {
+        margin-top: 80px;
+    }
+
+    .menu-wrapper {
+        position: fixed;
+        top:0;
+        left:0;
+        width:100vw;
+        height:100vh;
+        transform:translateX(-100%);
+        width: 100%;
+        background: linear-gradient(0deg, #cfe2ffe0 -0.12%, #fff3f3e6 100%);
+        transition:.3s ease-in-out all;
+        z-index: 3;
+        .mobile-menu {
+            padding-top:100px;
+            li {
+                margin: 0px 30px;
+                padding: 8px 0;
+                a {
+                    color: #7a7878;;
+                    font-size:24px;
+                }
+            }
+        }
+    }
+
+    .menu-opened {
+        width:100vw;
+        height:100vh;
+        overflow:hidden;
+        .menu-wrapper {
+            transform:translateX(0);
+        }
+        .main-content, footer {
+            filter:blur(10px);
+            transition:.3s ease-in-out all;
+        }
+        .hamburger {
+            span {
+                width:100%;
+                transform: rotate(45deg) translate(0px, 0px);
+                &:first-child {
+                    width:44px!important;
+                    transform: rotate(45deg) translate(8px, 9px);
+                }
+                &:last-child {
+                    width:44px!important;
+                    transform: rotate(-45deg) translate(8px, -8px);
+                }
+            }
+        }
+    }
 }

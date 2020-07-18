@@ -188,3 +188,26 @@
         }
     }
 }
+input[name="range"] {
+    min-width:200px!important;
+}
+
+
+@include media-breakpoint-down(sm) {
+    .daterangepicker {
+        width:auto!important;
+        left:0!important;
+        .ranges {
+            padding:0 15px;
+            padding-right:0;
+            ul {
+                @include justify-content(center);
+                li {
+                    padding:7px 25px;
+                    margin:0 5px;
+                    font-size:14px;
+                }
+            }
+        }
+    }
+}

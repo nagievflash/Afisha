@@ -28,7 +28,7 @@
         <div class="col row no-gutter">
             <div class="d-flex justify-content-start filter-wrapper">
                 <div class="input-group">
-                    <input type="text" name="range" value="" placeholder="Выберите дату" class="form-control range-input" />
+                    <input type="text" name="range" value="Дата" placeholder="Выберите дату" class="form-control range-input" />
                     <div class="input-group-prepend">
                         <div class="input-group-text">@include('assets.calendar')</div>
                     </div>
@@ -46,6 +46,7 @@
         </div>
     </div>
 </div>
+
 @endsection
 
 @section('content')
@@ -73,6 +74,7 @@
         </div>
     </section>
     <!--
+    @if (null)
     <section id="movies">
         <div class="section-title text-center">
             <h2>Сегодня в кино</h2>
@@ -188,7 +190,9 @@
 
         </div>
     </section>
+    @endif
 -->
+    @isset($event)
     <section id="promo" style="background-image:url(/images/karenina.webp)">
         <div class="container">
             <div class="promo-header">
@@ -251,6 +255,7 @@
             </div>
         </div>
     </section>
+    @endisset
 @endsection
 
 @section('scripts')

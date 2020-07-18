@@ -127287,8 +127287,14 @@ $(document).ready(function () {
     } else {
       $('#pagination button:first').click();
     }
-  }, 6000);
+  }, 1116000);
+  var ajaxRequest;
   $('#search-input').on('click keyup search', function (e) {
+    if (ajaxRequest) {
+      ajaxRequest.abort();
+    }
+
+    e.preventDefault();
     $('.spinner-wrapper').remove();
     var a = e.target.value;
 
@@ -127299,8 +127305,8 @@ $(document).ready(function () {
     }
 
     var b = $('#search-results');
-    b.show('slow').prepend('<div class="spinner-wrapper"><span class="spinner"><span></span></span></div>');
-    $.ajax({
+    b.show().prepend('<div class="spinner-wrapper"><span class="spinner"><span></span></span></div>');
+    ajaxRequest = $.ajax({
       url: '/search',
       type: 'post',
       data: {
@@ -127320,13 +127326,18 @@ $(document).ready(function () {
       }
     });
   });
-  $('#search-input').focusout(function () {
-    $('#search-results').html('').hide();
-  });
   $('#searchform').submit(function (e) {
     e.preventDefault();
     var a = $(this).find('input[type="search"]').val();
     location.href = "/search/" + encodeURIComponent(a);
+  });
+  $(document).on('click', function (e) {
+    var el = '.search';
+    if (jQuery(e.target).closest(el).length) return;
+    $('#search-results').html('').hide();
+  });
+  $('.hamburger').click(function () {
+    $('body').toggleClass('menu-opened');
   });
 });
 
@@ -127413,16 +127424,18 @@ var displacementSlider = function displacementSlider(opts) {
   var parent = opts.parent;
   var renderWidth = document.getElementById('slider').offsetWidth;
   var renderHeight = document.getElementById('slider').offsetHeight;
+  console.log(canvasWidth, canvasHeight, renderWidth, renderHeight);
   var renderW, renderH;
 
-  if (renderWidth > canvasWidth) {
-    renderW = renderWidth;
+  if (renderWidth >= canvasWidth) {
+    renderW = renderWidth * (renderHeight / canvasHeight);
     renderH = renderHeight * (renderWidth / canvasWidth);
   } else {
     renderW = canvasWidth;
     renderH = canvasHeight;
   }
 
+  console.log(renderW, renderH);
   var renderer = new THREE.WebGLRenderer({
     antialias: false
   });

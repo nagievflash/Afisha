@@ -293,3 +293,123 @@
 		transform: scale3d(0.5,0.5,1);
 	}
 }
+
+@include media-breakpoint-down(sm) {
+	.hero-slider {
+		height:440px;
+		#pagination {
+			position: absolute;
+			z-index: 6;
+			right: 0;
+			left: 0;
+			bottom: 25px;
+			display: flex;
+			-moz-justify-content: center;
+			-ms-justify-content: center;
+			justify-content: center;
+			-ms-flex-pack: center;
+			-moz-flex-direction: column;
+			flex-direction: row;
+			top:initial;
+			button {
+				margin:0 5px;
+			}
+		}
+		.slider-inner {
+			padding:20px 20px 30px;
+			canvas {
+				height: 100%!important;
+			}
+
+			#slider-content {
+				#slide {
+					@include flexbox();
+					@include flex-direction(column);
+					@include align-items(space-between);
+					@include justify-content(flex-start);
+
+					.slide-header {
+						.event__age-restriction {
+							position: relative;
+							left:0;
+							margin-right:15px;
+							span {
+								font-size:12px;
+							}
+						}
+						.event__type {
+							flex-grow:1;
+							flex-shrink: 0;
+							margin-right:15px;
+							font-size:12px;
+						}
+						.event__tags {
+							a {
+								font-size:12px;
+								line-height: 1.2;
+							}
+							text-align:right;
+						}
+					}
+					.slide-content {
+						margin-top:35px;
+						.event__title h2 {
+							font-weight: 300;
+							font-size: 24px;
+							line-height: 110%;
+							margin-bottom: 15px;
+						}
+						.event__description {
+							width:100%;
+							p {
+								font-size:12px;
+							}
+						}
+					}
+					.slide-footer {
+						.col, .row {
+							height:100%;
+							@include align-items(flex-end);
+						}
+						.event__date {
+							font-size:14px;
+							line-height:21px;
+							width:100%;
+						}
+						.event__location {
+							font-size:14px;
+							line-height:21px;
+							width:100%;
+							margin-left:0;
+							margin-bottom: 30px;
+						}
+						.event__accept {
+							margin-left:0!important;
+							width: calc(100vw - 165px);
+							padding: 9px 30px 7px;
+							.event-accept {
+								font-size: 14px;
+							}
+							.event-angle {
+								top: 9px;
+								svg {
+									width: 36px;
+								}
+							}
+						}
+						.add-to-wishlist {
+							width:38px;
+							height:38px;
+							svg {
+								margin-top: 2px;
+								width: 18px;
+								height: 18px;
+							}
+						}
+					}
+				}
+			}
+		}
+		margin-bottom: 40px;
+	}
+}

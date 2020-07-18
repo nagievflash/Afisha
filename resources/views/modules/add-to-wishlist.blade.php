@@ -22,14 +22,14 @@ function addToWishlist(e){
         success: function (data) {
             if (data == 200) {
                 $('.add-to-wishlist[data-id="' + id + '"]').addClass('added');
-                var wishlistCount =  parseInt($('.header-top-icons .wishlist-icon span').text())
-                $('.header-top-icons .wishlist-icon span').text(wishlistCount + 1)
+                var wishlistCount =  parseInt($('.header-top-icons .wishlist-icon span').eq(0).text()) + 1;
+                $('.header-top-icons .wishlist-icon span').text(wishlistCount)
 
             }
             if (data == 23000) {
                 $('.add-to-wishlist[data-id="' + id + '"]').removeClass('added');
-                var wishlistCount =  parseInt($('.header-top-icons .wishlist-icon span').text())
-                $('.header-top-icons .wishlist-icon span').text(wishlistCount - 1)
+                var wishlistCount =  parseInt($('.header-top-icons .wishlist-icon span').eq(0).text()) -1;
+                $('.header-top-icons .wishlist-icon span').text(wishlistCount)
             }
         },
 

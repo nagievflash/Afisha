@@ -24,6 +24,7 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::post('/profile', 'ProfileController@update')->name('profileUpdate');
 Route::post('/search', 'SearchController@show');
 Route::get('/search/{request}', 'SearchController@index')->name('search');
+Route::get('/tags/{tag}', 'TagController@index')->name('tag');
 
 Route::resource('wishlist', 'WishlistController', [
     'names' => [

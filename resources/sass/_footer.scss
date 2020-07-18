@@ -1,6 +1,6 @@
 footer {
     margin-top: -100px;
-    padding-top: 240px;
+    padding-top: 280px;
     padding-bottom: 60px;
     background-image: url(/css/icons/footer-mask.svg);
     background-size:100% 600px;
@@ -52,6 +52,26 @@ footer {
             .btn-blue {
                 color:#fff;
                 font-weight: bold;
+            }
+        }
+    }
+}
+
+@include media-breakpoint-down(sm) {
+    footer {
+        margin-top: 0;
+        padding: 60px 25px;
+        background: #fbf3f3;
+        .logo {
+            display: none;
+        }
+        .container>.row {
+            @include flex-direction(column-reverse);
+            .subscribe-block {
+                margin-bottom:35px;
+                p {
+                    font-size:13px;
+                }
             }
         }
     }

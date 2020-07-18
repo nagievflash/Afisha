@@ -17,6 +17,7 @@
 </head>
 <body class="{{ $bodyClass ?? '' }}">
     @include('layouts.header')
+    @include('layouts.header-mobile')
     <div class="main-content">
         @yield('content')
     </div>

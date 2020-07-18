@@ -9,9 +9,15 @@ $(document).ready(function(){
         else {
             $('#pagination button:first').click();
         }
-    }, 6000);
+    }, 1116000);
 
-    $('#search-input').on('click keyup search', function(e){
+        var ajaxRequest;
+
+        $('#search-input').on('click keyup search', function(e){
+        if (ajaxRequest) {
+            ajaxRequest.abort();
+        }
+        e.preventDefault();
         $('.spinner-wrapper').remove();
         var a = e.target.value;
         if (a != '') {
@@ -22,9 +28,9 @@ $(document).ready(function(){
         }
 
         let b = $('#search-results')
-        b.show('slow').prepend('<div class="spinner-wrapper"><span class="spinner"><span></span></span></div>');
+        b.show().prepend('<div class="spinner-wrapper"><span class="spinner"><span></span></span></div>');
 
-        $.ajax({
+        ajaxRequest = $.ajax({
             url: '/search',
             type: 'post',
             data: {
@@ -44,13 +50,20 @@ $(document).ready(function(){
             }
         })
     })
-    $('#search-input').focusout(function(){
-        $('#search-results').html('').hide();
-    })
     $('#searchform').submit(function(e) {
         e.preventDefault();
         let a = $(this).find('input[type="search"]').val()
         location.href = "/search/" + encodeURIComponent(a);
+    })
+
+    $(document).on('click',function (e) {
+        var el = '.search';
+        if (jQuery(e.target).closest(el).length) return;
+        $('#search-results').html('').hide();
+    });
+
+    $('.hamburger').click(function(){
+        $('body').toggleClass('menu-opened');
     })
 
 })

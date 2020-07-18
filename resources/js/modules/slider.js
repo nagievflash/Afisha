@@ -44,16 +44,17 @@ const displacementSlider = function(opts) {
     let parent = opts.parent;
     let renderWidth = document.getElementById('slider').offsetWidth;
     let renderHeight = document.getElementById('slider').offsetHeight;
-
+    console.log(canvasWidth, canvasHeight, renderWidth, renderHeight)
     let renderW, renderH;
 
-    if( renderWidth > canvasWidth ) {
-        renderW = renderWidth;
+    if( renderWidth >= canvasWidth ) {
+        renderW = renderWidth * (renderHeight / canvasHeight);
         renderH = renderHeight * (renderWidth / canvasWidth);
     } else {
         renderW = canvasWidth;
         renderH = canvasHeight;
     }
+    console.log(renderW, renderH)
 
     let renderer = new THREE.WebGLRenderer({
         antialias: false,
