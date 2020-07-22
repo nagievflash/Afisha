@@ -12,7 +12,7 @@
             <div id="slide">
                 <div class="slide-header">
                     <div class="event__age-restriction"><span>{{$event->age}}</span></div>
-                    <div class="event__type"><span>@include('assets.melodic')</span> Мюзикл</div>
+                    <div class="event__type"><span>{!! $event->categories()->first()->icons !!}</span> {{$event->categories()->first()->name}}</div>
                     <div class="event__tags">
                         @foreach ($event->tags as $tag)
                         <a href="/tags/{{ $tag->slug}}" class="event__tag">#{{$tag->title}}</a>
@@ -50,7 +50,7 @@
             <div data-slide-content="{{$loop->index}}">
                 <div class="slide-header">
                     <div class="event__age-restriction"><span>{{$event->age}}</span></div>
-                    <div class="event__type"><span>@include('assets.melodic')</span> Мюзикл</div>
+                    <div class="event__type"><span>{!! $event->categories()->first()->icons !!}</span> {{$event->categories()->first()->name}}</div>
                     <div class="event__tags">
                         @foreach ($event->tags as $tag)
                         <a href="/tags/{{ $tag->slug}}" class="event__tag">#{{$tag->title}}</a>

@@ -1,9 +1,9 @@
 footer {
     margin-top: -100px;
     padding-top: 280px;
-    padding-bottom: 60px;
+    padding-bottom: 30px;
     background-image: url(/css/icons/footer-mask.svg);
-    background-size:100% 600px;
+    background-size:100% 100%;
     background-position: top center;
     background-repeat:no-repeat;
     .logo {
@@ -15,17 +15,17 @@ footer {
         margin:0;
         li {
             padding:1px 0;
-            margin:0;
+            margin: 5px 0;
             a {
                 text-decoration: none;
                 font-size:15px;
-                font-weight: bold;
-                color:#A897A0;
+                font-weight: 400;
+                color:#767676;
                 line-height: 150%;
                 letter-spacing: 0.02em;
+                transition:.2s ease-in-out all;
                 &:hover {
-                    text-decoration: underline;
-                    color:#555;
+                    color:#333;
                 }
             }
         }
@@ -55,13 +55,34 @@ footer {
             }
         }
     }
+    .copyright {
+        margin-top: 20px;
+        padding-top: 20px;
+        a {
+            color: #777777;
+            font-size: 14px;
+            span {
+                color: #e9905b;
+            }
+            transition:.2s ease-in-out all;
+            &:hover {
+                color:#444;
+                text-decoration:none;
+                span {
+                    color:#fe721f;
+                }
+            }
+        }
+    }
 }
 
 @include media-breakpoint-down(sm) {
     footer {
         margin-top: 0;
-        padding: 60px 25px;
+        padding: 60px 25px 80px;
         background: #fbf3f3;
+        position: relative;
+        overflow: hidden;
         .logo {
             display: none;
         }
@@ -72,6 +93,15 @@ footer {
                 p {
                     font-size:13px;
                 }
+            }
+        }
+        .copyright-wrapper {
+            position:absolute;
+            bottom:30px;
+            left:25px;
+            margin:0 auto;
+            .row {
+                justify-content:flex-start!important;
             }
         }
     }

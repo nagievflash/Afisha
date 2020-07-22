@@ -127287,24 +127287,25 @@ $(document).ready(function () {
     } else {
       $('#pagination button:first').click();
     }
-  }, 1116000);
+  }, 6000);
   var ajaxRequest;
-  $('#search-input').on('click keyup search', function (e) {
+  $('input[name="search"]').on('click keyup search', function (e) {
     if (ajaxRequest) {
       ajaxRequest.abort();
     }
 
     e.preventDefault();
     $('.spinner-wrapper').remove();
+    var form = $(this).closest('form');
     var a = e.target.value;
 
     if (a != '') {
-      $('.search .input-group-prepend').hide();
+      $(form).find('.search .input-group-prepend').hide();
     } else {
-      $('.search .input-group-prepend').show();
+      $(form).find('.search .input-group-prepend').show();
     }
 
-    var b = $('#search-results');
+    var b = $(form).find('.search-results');
     b.show().prepend('<div class="spinner-wrapper"><span class="spinner"><span></span></span></div>');
     ajaxRequest = $.ajax({
       url: '/search',
@@ -127321,20 +127322,24 @@ $(document).ready(function () {
           b.find('ul').append('<li><a href="/events/' + item.slug + '">' + item.title + '</a></li>');
         });
         $('.spinner-wrapper').remove();
-        $('.search-link').parent().remove();
+        $(form).find('.search-link').parent().remove();
         if (a.length != 0) b.find('ul').append('<li><a class="search-link" href="/search/' + encodeURIComponent(a) + '">Все результаты по поиску "' + a + '"</li>');
       }
     });
   });
-  $('#searchform').submit(function (e) {
+  $('#searchform, #searchform-mobile').submit(function (e) {
     e.preventDefault();
     var a = $(this).find('input[type="search"]').val();
     location.href = "/search/" + encodeURIComponent(a);
   });
+  $('.mobile .search-icon').click(function () {
+    $('.mobile .search-wrapper').slideToggle(200);
+    $('body').toggleClass('search-active');
+  });
   $(document).on('click', function (e) {
     var el = '.search';
     if (jQuery(e.target).closest(el).length) return;
-    $('#search-results').html('').hide();
+    $('.search-results').html('').hide();
   });
   $('.hamburger').click(function () {
     $('body').toggleClass('menu-opened');

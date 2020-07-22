@@ -95,7 +95,11 @@
         min-height: calc(100vw / 2)
     }
     .items-list .item .item-price {
-        font-size:16px;
+        font-size:12px;
+        bottom: 130px;
+        width: 161px;
+        height:40px;
+        line-height: 40px;
     }
     .event__accept {
         margin-left:0!important;
@@ -147,23 +151,26 @@
             &:first-of-type {
                 margin-top:50px;
             }
+            &:last-of-type {
+                border-bottom:none;
+            }
             .date {
                 text-align: left;
                 display:block;
                 width:100%;
                 padding-left:15px;
                 .day {
-                    font-size: 60px;
+                    font-size: 48px;
                     line-height: 55px;
                     float: left;
-                    width: 76px;
+                    width: 55px;
                     display: block;
                     margin-left: -5px;
 
                 }
                 .month {
-                    font-size: 28px;
-                    line-height: 21px;
+                    font-size: 24px;
+                    line-height: 16px;
                     display: block;
                     margin-top: 7px;
                 }
@@ -186,38 +193,69 @@
             }
         }
         .schedule-item {
-            min-width:250px;
+            min-width: 140px;
             &.time-item {
-                min-width:180px;
+                min-width:100px;
+                text-align: right;
             }
-            .location {
-                font-size:20px;
-                svg {
-                    margin-right:5px;
-                    transform: translateY(-2px);
-                    path {
-                        fill:#333;
+            &.location-item {
+                min-width: 100%;
+                text-align:center;
+                .location {
+                    text-align:center;
+                    font-size: 16px;
+                    margin: 15px;
+                    svg {
+                        margin-right:5px;
+                        transform: translateY(-2px);
+                        path {
+                            fill:#333;
+                        }
                     }
                 }
             }
-            .ticket {
-                text-align:right;
-                a {
-                    padding: 13px 45px 11px;
-                    background: linear-gradient(28.82deg, #FF6868 20.7%, #FFCA6A 75.17%);
-                    border-radius: 40px;
-                    position: relative;
-                    cursor: pointer;
-                    margin-right: 25px;
-                    color:#fff;
-                    transition:.3s ease-out all;
-                    text-decoration:none;
-                    font-size:18px;
-                    &:hover {
-                        box-shadow: 0 2px 5px rgba(0,0,0,.3);
+
+            &.ticket-item {
+                width:100%;
+                text-align:center;
+                .ticket {
+                    text-align:center;
+                    width:100%;
+                    a {
+                        padding: 13px 45px 11px;
+                        background: linear-gradient(28.82deg, #FF6868 20.7%, #FFCA6A 75.17%);
+                        border-radius: 40px;
+                        position: relative;
+                        cursor: pointer;
+                        color:#fff;
+                        transition:.3s ease-out all;
+                        text-decoration:none;
+                        font-size:18px;
+                        margin: 0 auto;
+                        display: inline-block;
+                        min-width: 100%;
+                        &:hover {
+                            box-shadow: 0 2px 5px rgba(0,0,0,.3);
+                        }
                     }
                 }
             }
+
         }
+    }
+    .event .main-content .similiar-events {
+        padding:0 0 40px;
+    }
+    .event .main-content .similiar-events .item {
+        margin-bottom: 30px;
+    }
+    header.mobile .header-top-icons .dropdown-menu {
+        width: 101vw!important;
+        padding: 25px 30px!important;
+        border-radius: 0!important;
+        z-index: 999999;
+        top: 13px !important;
+        right: -70px !important;
+        left: auto!important;
     }
 }

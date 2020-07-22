@@ -28,7 +28,7 @@ class GetEventsController extends Controller
 
     public function index($slug) {
         $event = Events::where('slug', $slug)
-        ->get()->first();
+        ->firstOrFail();
         $bodyClass = 'event';
         $similiarEvents = $this->getSimiliarEvents($slug);
         return view('event', compact('event', 'bodyClass', 'similiarEvents'));

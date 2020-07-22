@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use TCG\Voyager\Models\Page;
+
+use App\Page as Pages;
+use App\Event as Events;
+use App\Category as Categories;
 
 class PageController extends Controller
 {
@@ -12,10 +15,47 @@ class PageController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+
+    public $slug;
+    public $category;
+
     public function index($slug)
     {
-        $page = Page::where('slug', $slug)->firstOrFail();
-        return view('page', ['page' => $page]);
+        $this->slug = $slug;
+        $bodyClass = 'page';
+
+        $page = Pages::where('slug', $this->slug)->firstOrFail();
+        $items = new Events;
+
+
+        $category = Categories::where('slug', $this->slug)->first();
+        $this->category = $category;
+        if ($this->category) {
+            $promo = $page->promo()->first();
+            if ($promo) {
+                $events = $items->getItemsByCategoryName($this->category->name)
+                ->where('status', 'PUBLISHED')
+                ->where('title', '!=', $promo->title);
+            }
+            else {
+                $events = $items->getItemsByCategoryName($this->category->name)
+                ->where('status', 'PUBLISHED');
+                $bodyClass .= ' nopromo';
+            }
+            $nearest = Events::limit(6)
+            ->whereHas('schedules', function($query) {
+                $query->where('date', '>', date("Y-m-d"));
+            })
+            ->whereDoesntHave('categories', function($query) {
+                $query->where('name', $this->category->name);
+            })->where('status', 'PUBLISHED')->get();
+
+            return view('category', compact('events', 'nearest', 'bodyClass', 'promo', 'page'));
+        }
+        else {
+            return view('page', compact('bodyClass', 'page'));
+        }
+
     }
 
     /**

@@ -18,7 +18,7 @@
                                     <div class="input-group-prepend">
                                         <div class="input-group-text">@include('assets.search', ['search' => "search"])</div>
                                     </div>
-                                    <div id="search-results">
+                                    <div id="search-results" class="search-results">
 
                                     </div>
                                 </div>
@@ -57,16 +57,7 @@
             </div>
         </div>
         <div class="menu-wrapper row">
-            <ul class="nav main-menu d-flex justify-content-start">
-                <li><a href="">Кино</a></li>
-                <li><a href="">Концерты</a></li>
-                <li><a href="">Спорт</a></li>
-                <li><a href="">Детям</a></li>
-                <li><a href="">Шоу</a></li>
-                <li><a href="">Скидки</a></li>
-                <li><a href="">Новости</a></li>
-                <li><a href="">Контакты</a></li>
-            </ul>
+            {{menu('Главное меню', 'modules.main_menu')}}
         </div>
         @yield('filter')
     </div>

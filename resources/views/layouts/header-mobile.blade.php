@@ -9,19 +9,19 @@
                         <span></span>
                     </a>
                 </div>
-                <a class="icon search-icon" title="Поиск по мероприятиям" id="searchForm" >@include('assets.search', ['search' => "search-mobile"])</a>
+                <a class="icon search-icon" title="Поиск по мероприятиям" id="searchForm-mobile" >@include('assets.search', ['search' => "search-mobile"])</a>
 
                 <div class="col-lg-4 d-md-none search-wrapper">
                     <div class="row">
                         <div class="search">
-                            <form method="POST" action="search" id="searchform">
+                            <form method="POST" action="search" id="searchform-mobile">
                                 <div>
                                     <div class="input-group">
-                                        <input  name="search" autocomplete="off" spellcheck="false" autocorrect="off" type="search" class="form-control" id="search-input" placeholder="Поиск по предстоящим событиям">
+                                        <input name="search" autocomplete="off" spellcheck="false" autocorrect="off" type="search" class="form-control" id="search-input-mobile" placeholder="Поиск по предстоящим событиям">
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">@include('assets.search', ['search' => "search-mobile"])</div>
                                         </div>
-                                        <div id="search-results">
+                                        <div id="search-results-mobile" class="search-results">
 
                                         </div>
                                     </div>
@@ -66,15 +66,6 @@
     @yield('filter')
 
     <div class="menu-wrapper">
-        <ul class="nav mobile-menu d-flex justify-content-start flex-column">
-            <li><a href="">Кино</a></li>
-            <li><a href="">Концерты</a></li>
-            <li><a href="">Спорт</a></li>
-            <li><a href="">Детям</a></li>
-            <li><a href="">Шоу</a></li>
-            <li><a href="">Скидки</a></li>
-            <li><a href="">Новости</a></li>
-            <li><a href="">Контакты</a></li>
-        </ul>
+        {{menu('Главное меню', 'modules.main_menu_mobile')}}
     </div>
 </header>

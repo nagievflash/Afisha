@@ -41,6 +41,13 @@
                     </div>
                 </div>
             </div>
+            <div class="col-md-12 copyright-wrapper">
+                <div class="row justify-content-end">
+                    <div class="copyright">
+    					<a href="http://axiomadigital.ru" target="_blank" title="Разработка и продвижение сайтов">Разработано в студии <span>Axioma.Digital</span></a>
+    				</div>
+                </div>
+            </div>
         </div>
     </div>
 </footer>

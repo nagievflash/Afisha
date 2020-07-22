@@ -9,7 +9,7 @@
         <div class="row">
             <div class="promo-header">
                 <div class="event__age-restriction"><span>12</span></div>
-                <div class="event__type"><span>@include('assets.melodic')</span> Мюзикл</div>
+                <div class="event__type"><span>{!! $event->categories()->first()->icons !!}</span> {{$event->categories()->first()->name}}</div>
                 <div class="event__tags">
                     @foreach ($event->tags as $tag)
                     <a class="item-tag" href="/tags/{{ $tag->slug}}">#{{$tag->title}}</a>
@@ -25,7 +25,7 @@
                     <div class="row align-items-center">
                         <div class="col-md-6">
                             <div class="row">
-                                <a href="#" class="event__accept">
+                                <a href="#schedule" class="event__accept">
                                     <span class="event-accept">Пойти</span>
                                     <span class="event-angle">@include('assets.angle')</span>
                                 </a>
@@ -50,7 +50,7 @@
         </div>
     </div>
 </section>
-<section class="schedule">
+<section class="schedule" id="schedule">
     <div class="container">
         <div class="row">
             <h2>Расписание</h2>
@@ -68,12 +68,12 @@
                             <span>{{Date::parse($schedule->time)->format('H:s')}}</span>
                         </div>
                     </div>
-                    <div class="schedule-item">
+                    <div class="schedule-item location-item">
                         <div class="location">
                             <span class="icon-location">@include('assets.location')</span>{{$event->location}}
                         </div>
                     </div>
-                    <div class="schedule-item">
+                    <div class="schedule-item ticket-item">
                         <div class="ticket">
                             <a href="ticket-buy">@php if ($schedule->price == 0) echo 'Бесплатно'; else echo $schedule->price.' рублей'; @endphp</a>
                         </div>

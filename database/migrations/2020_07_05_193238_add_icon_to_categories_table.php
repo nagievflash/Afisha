@@ -14,7 +14,8 @@ class AddIconToCategoriesTable extends Migration
     public function up()
     {
         Schema::table('categories', function (Blueprint $table) {
-            $table->longtext('icons');
+            $table->longtext('icons')->nullable();
+            $table->integer('promo_id')->nullable();
         });
     }
 
@@ -27,6 +28,7 @@ class AddIconToCategoriesTable extends Migration
     {
         Schema::table('categories', function (Blueprint $table) {
             $table->dropColumn('icons');
+            $table->dropColumn('promo_id');
         });
     }
 }

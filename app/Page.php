@@ -40,6 +40,14 @@ class Page extends Model
     }
 
 
+    /**
+     * Получить промо-блок.
+     */
+    public function promo()
+    {
+        return $this->belongsTo('App\Event', 'promo_id');
+    }
+
 
     /**
      * Событие перед сохранением события Voyager.

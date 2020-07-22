@@ -193,45 +193,7 @@
     @endif
 -->
     @isset($event)
-    <section id="promo" style="background-image:url(/images/karenina.webp)">
-        <div class="container">
-            <div class="promo-header">
-                <div class="event__age-restriction"><span>12</span></div>
-                <div class="event__type"><span>@include('assets.melodic')</span> Мюзикл</div>
-                <div class="event__tags">
-                    <a href="#" class="event__tag">#Мюзикл</a>
-                    <a href="#" class="event__tag">#Представление</a>
-                    <a href="#" class="event__tag">#Спектакль</a>
-                    <a href="#" class="event__tag">#Театр</a>
-                </div>
-            </div>
-            <div class="promo-content">
-                <div class="event__title"><h2>Анна Каренина</h2></div>
-                <div class="event__description"><p>Современный итальянский балет «Анна Каренина» представляет вашему вниманию трагическую историю любви замужней дамы Анны Карениной и блестящего офицера...</p></div>
-            </div>
-            <div class="promo-footer">
-                <div class="col">
-                    <div class="row align-items-center">
-                        <div class="col-md-6">
-                            <div class="row">
-                                <div class="event__date"><span class="icon-calendar">@include('assets.calendar')</span>10 Апреля, 19:00</div>
-                                <div class="event__location"><span class="icon-location">@include('assets.location')</span>МБОУ ГДК «Украина»</div>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="row">
-                                <a href="#" class="event__accept ml-auto">
-                                    <span class="event-accept">Пойти</span>
-                                    <span class="event-angle">@include('assets.angle')</span>
-                                </a>
-                                <div class="event__add-wishlist">@include('modules.add-to-wishlist', array('event_id' => $event->id))</div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+    @include('modules.promo', array('promo' => $promo))
     <section id="events">
         <div class="section-title text-center">
             <h2>Ближайшие события</h2>

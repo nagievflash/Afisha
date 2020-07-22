@@ -107,8 +107,12 @@ h1, h2, h3, h4, h5, h6 {
     }
 }
 .items-list {
+    h2 {
+        margin-bottom: 40px;
+    }
     .item {
         position: relative;
+        margin-bottom: 40px;
 
         .item-wrapper {
             box-shadow: 0px 10px 30px #FBEAEB;
@@ -191,6 +195,10 @@ h1, h2, h3, h4, h5, h6 {
                 span {
                     margin-left:5px;
                     vertical-align: middle;
+                    font-size:11px;
+                }
+                .item-date, .item-location {
+                    flex-shrink: 0;
                 }
             }
         }
@@ -211,7 +219,7 @@ h1, h2, h3, h4, h5, h6 {
 @import 'promo';
 
 #concert {
-    padding-bottom: 50px;
+    padding-bottom: 0;
 }
 
 #events {
@@ -241,11 +249,23 @@ h1, h2, h3, h4, h5, h6 {
         text-decoration: none;
     }
 }
-.homepage #events {
+.homepage #events, .page #events {
     margin-top:120px;
 }
-.add-to-wishlist {
+.nopromo.page #events {
+    margin-top:60px;
+}
 
+.no-items {
+    font-size:18px;
+    background: #fff1f1;
+    padding: 25px!important;
+    border-radius: 40px;
+    p {
+        margin:0;
+    }
+}
+.add-to-wishlist {
 
     @include flexbox();
     @include justify-content(center);
@@ -309,7 +329,7 @@ h1, h2, h3, h4, h5, h6 {
     }
 	& * {
 		color:#fff;
-        z-index: 5;
+        z-index: 1;
 	}
 
 	.promo-header {
@@ -328,6 +348,7 @@ h1, h2, h3, h4, h5, h6 {
 			background-image:url('/css/icons/age-restrictions.svg');
 			background-size:cover;
 			text-align: center;
+            flex-shrink:0;
 
 			span {
 				color:#fff;
@@ -342,9 +363,13 @@ h1, h2, h3, h4, h5, h6 {
 			color: #fff;
 			vertical-align: middle;
 			font-weight: 400;
+            flex-shrink:0;
 			span {
 				vertical-align: text-bottom;
 				margin-right: 5px;
+                svg {
+                    height:17px!important;
+                }
 			}
 		}
 		.event__tags {
@@ -670,10 +695,4 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     text-align: center;
     margin-bottom: 35px;
-}
-#search-results {
-    padding-bottom: 50px;
-}
-.tags .fake-row {
-    padding:40px 0;
 }

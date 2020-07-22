@@ -26,7 +26,7 @@ class HomeController extends Controller
     public function index()
     {
         $items = new Events;
-        $concerts = $items->getItemsByCategoryName('Концерты')
+        $concerts = $items->getItemsByCategoryName('Концерт')
         ->where('status', 'PUBLISHED');
 
         $sports = $items->getItemsByCategoryName('Спорт')
@@ -38,10 +38,11 @@ class HomeController extends Controller
         })->where('status', 'PUBLISHED')->get();
 
         $slider = Pages::where('slug', '=', 'home')->first();
+        $promo = $slider->promo()->first();
         $bodyClass = 'homepage';
 
 
-        return view('home', compact('events', 'concerts', 'sports', 'slider', 'bodyClass'));
+        return view('home', compact('events', 'concerts', 'sports', 'slider', 'bodyClass', 'promo'));
     }
 
     public function loadMore($offset) {

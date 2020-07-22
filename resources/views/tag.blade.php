@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Главная')
+@section('title', 'Все события по хештегу #'.$tag)
 
 @section('content')
 
