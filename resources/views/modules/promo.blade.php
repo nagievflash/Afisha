@@ -8,6 +8,7 @@
         }
         else $price = false;
 @endphp
+
 <section id="promo" style="background-image:url({{ Voyager::image( $promo->promo_image ) }})">
     <div class="container">
         <div class="promo-header">
@@ -38,7 +39,7 @@
                                 <span class="event-accept">Пойти</span>
                                 <span class="event-angle">@include('assets.angle')</span>
                             </a>
-                            <div class="item-wishlist">@include('modules.add-to-wishlist', array('event_id' => $event->id))</div>
+                            <div class="item-wishlist">@include('modules.add-to-wishlist', array('event_id' => $promo->id))</div>
                         </div>
                     </div>
                 </div>
