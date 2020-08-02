@@ -10,6 +10,7 @@
             <div class="promo-header">
                 <div class="event__age-restriction"><span>12</span></div>
                 <div class="event__type"><span>{!! $event->categories()->first()->icons !!}</span> {{$event->categories()->first()->name}}</div>
+                @if ($event->accessible_for_disabled_people)<div class="event__people_disabled">@include('assets.people_disabled') <span>Доступно для инвалидов</span></div>@endif
                 <div class="event__tags">
                     @foreach ($event->tags as $tag)
                     <a class="item-tag" href="/tags/{{ $tag->slug}}">#{{$tag->title}}</a>

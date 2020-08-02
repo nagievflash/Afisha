@@ -52,6 +52,28 @@ footer {
             .btn-blue {
                 color:#fff;
                 font-weight: bold;
+                cursor:pointer!important;
+                border-top-left-radius: 0!important;
+                border-bottom-left-radius: 0!important;
+                font-size: 15px;
+                padding-right: 25px;
+            }
+        }
+        .input-message {
+            span {
+                margin-top: 15px;
+                display: block;
+                font-size: 14px;
+                border-radius: 20px;
+                padding: 11px 15px 10px;
+                text-align: center;
+                color: #fff!important;
+                &.text-success {
+                    background-color: #38c17296;
+                }
+                &.text-danger {
+                    background-color: #e3342f9c;
+                }
             }
         }
     }

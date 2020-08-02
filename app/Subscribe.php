@@ -5,14 +5,14 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 
 
-class Tag extends Model
+class Subscribe extends Model
 {
     /**
      * Таблица, связанная с моделью.
      *
      * @var string
      */
-    protected $table = 'tags';
+    protected $table = 'subscribes';
 
     /**
      * Определяет необходимость отметок времени для модели.
@@ -28,20 +28,4 @@ class Tag extends Model
      */
     protected $guarded = [];
 
-    /**
-     * Получить события.
-     */
-    public function tags()
-    {
-        return $this->belongsToMany('App\Tag', 'tag_event');
-    }
-
-
-    /**
-     * Получить новости.
-     */
-    public function news()
-    {
-        return $this->belongsToMany('App\News', 'tag_news');
-    }
 }

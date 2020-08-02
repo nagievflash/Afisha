@@ -119,6 +119,7 @@
                                             }
                                             @endphp
                                             <td>
+
                                                 @if (isset($row->details->view))
                                                     @include($row->details->view, ['row' => $row, 'dataType' => $dataType, 'dataTypeContent' => $dataTypeContent, 'content' => $data->{$row->field}, 'action' => 'browse', 'view' => 'browse', 'options' => $row->details])
                                                 @elseif($row->type == 'image')
@@ -165,6 +166,8 @@
                                                     @else
                                                         {{ $data->{$row->field} }}
                                                     @endif
+                                                @elseif($row->type == 'time')
+                                                    {{ \Carbon\Carbon::parse($data->{$row->field})->format('H:s') }}
                                                 @elseif($row->type == 'checkbox')
                                                     @if(property_exists($row->details, 'on') && property_exists($row->details, 'off'))
                                                         @if($data->{$row->field})
@@ -179,7 +182,12 @@
                                                     <span class="badge badge-lg" style="background-color: {{ $data->{$row->field} }}">{{ $data->{$row->field} }}</span>
                                                 @elseif($row->type == 'text')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
+
+                                                    @if($row->field == 'scheduleable_id')
+                                                        {{ App\Event::where('id', $data->{$row->field})->first()->title }}
+                                                    @else
                                                     <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
+                                                    @endif
                                                 @elseif($row->type == 'text_area')
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
                                                     <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>

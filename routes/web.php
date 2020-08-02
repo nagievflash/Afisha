@@ -26,6 +26,9 @@ Route::post('/profile', 'ProfileController@update')->name('profileUpdate');
 Route::post('/search', 'SearchController@show');
 Route::get('/search/{request}', 'SearchController@index')->name('search');
 Route::get('/tags/{tag}', 'TagController@index')->name('tag');
+Route::get('/news', 'NewsController@index')->name('news');
+Route::get('/news/{slug}', 'NewsController@show');
+Route::post('/subscribe', 'SubscribeController@create');
 
 Route::resource('wishlist', 'WishlistController', [
     'names' => [

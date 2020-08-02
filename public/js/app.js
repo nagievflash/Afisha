@@ -127344,6 +127344,26 @@ $(document).ready(function () {
   $('.hamburger').click(function () {
     $('body').toggleClass('menu-opened');
   });
+  $('.subscribe-form').submit(function (e) {
+    e.preventDefault();
+    var email = $(this).find('.subscribe-input').val();
+    $.ajax({
+      url: '/subscribe',
+      type: 'post',
+      data: {
+        email: email
+      },
+      headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      },
+      success: function success(data) {
+        $('.subscribe-block .input-message').html('<span class="text-success">Вы успешно подписались на нашу новостную рассылку.</span>');
+      },
+      error: function error(data) {
+        $('.subscribe-block .input-message').html('<span class="text-danger">' + data.responseJSON.errors.email + '</<span></span>>');
+      }
+    });
+  });
 });
 
 /***/ }),

@@ -3,17 +3,11 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use TCG\Voyager\Traits\Resizable;
 
-
-class Tag extends Model
+class News extends Model
 {
-    /**
-     * Таблица, связанная с моделью.
-     *
-     * @var string
-     */
-    protected $table = 'tags';
-
+    use Resizable;
     /**
      * Определяет необходимость отметок времени для модели.
      *
@@ -29,19 +23,11 @@ class Tag extends Model
     protected $guarded = [];
 
     /**
-     * Получить события.
+     * Получить теги.
      */
     public function tags()
     {
-        return $this->belongsToMany('App\Tag', 'tag_event');
+        return $this->belongsToMany('App\Tag', 'tag_news');
     }
 
-
-    /**
-     * Получить новости.
-     */
-    public function news()
-    {
-        return $this->belongsToMany('App\News', 'tag_news');
-    }
 }

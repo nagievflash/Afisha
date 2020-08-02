@@ -1,4 +1,9 @@
 @include media-breakpoint-down(sm) {
+    .event__people_disabled {
+        span {
+            display:none;
+        }
+    }
     .items-list {
         .item {
             .item-image {
@@ -141,6 +146,9 @@
     }
     .event .main-content .content .event-description {
         font-size:16px;
+        p {
+            font-size:14px;
+        }
     }
 
 
@@ -155,12 +163,12 @@
             margin-top:50px;
         }
         .schedule-wrapper {
-            padding: 50px 15px;
+            padding: 25px 15px;
             margin-top: -1px;
             border-top:1px solid #bbb;
             border-bottom:1px solid #bbb;
             &:first-of-type {
-                margin-top:50px;
+                margin-top:25px;
             }
             &:last-of-type {
                 border-bottom:none;
@@ -171,7 +179,7 @@
                 width:100%;
                 padding-left:15px;
                 .day {
-                    font-size: 48px;
+                    font-size: 42px;
                     line-height: 55px;
                     float: left;
                     width: 55px;
@@ -180,7 +188,7 @@
 
                 }
                 .month {
-                    font-size: 24px;
+                    font-size: 18px;
                     line-height: 16px;
                     display: block;
                     margin-top: 7px;

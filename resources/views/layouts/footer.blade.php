@@ -32,11 +32,16 @@
                 <div class="row">
                     <div class="subscribe-block">
                         <p>Подпишись на новости об акциях и предстоящих событиях</p>
-                        <div class="input-group">
-                            <input type="text" placeholder="Введите ваш Email" class="subscribe-input form-control" />
-                            <div class="input-group-prepend">
-                                <div class="input-group-text btn-blue">Подписаться</div>
-                            </div>
+                            <form class="subscribe-form" action="/subscribe" method="POST">
+                                @csrf
+                                <div class="input-group">
+                                    <input type="email" required placeholder="Введите ваш Email" class="subscribe-input form-control" />
+                                    <div class="input-group-prepend">
+                                        <input type="submit" class="input-group-text btn-blue" value="Подписаться" />
+                                    </div>
+                                </div>
+                                <div class="input-message"></div>
+                            </form>
                         </div>
                     </div>
                 </div>

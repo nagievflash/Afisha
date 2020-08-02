@@ -81,7 +81,7 @@
 			@include flexbox();
 	        @include flex-direction(row);
 	        @include align-items(center);
-			@include justify-content(space-between);
+			@include justify-content(flex-start);
 			position: relative;
 
 			.event__age-restriction {
@@ -103,8 +103,17 @@
 					margin-left:1px;
 				}
 			}
+			.event__people_disabled {
+				margin-left:25px;
+				font-size:16px;
+				svg {
+					width:18px;
+					height:18px;
+					margin-right:5px;
+				}
+			}
 			.event__type {
-				font-size: 18px;
+				font-size: 16px;
 				color: #fff;
 				vertical-align: middle;
 				font-weight: 400;
@@ -117,6 +126,8 @@
 				}
 			}
 			.event__tags {
+				text-align: right;
+				flex-grow: 1;
 				a {
 					color:#fff;
 					text-decoration: none;
