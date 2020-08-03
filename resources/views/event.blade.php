@@ -2,6 +2,17 @@
 
 @section('title', 'Главная')
 
+@section('header')
+
+<!-- Put this script tag to the <head> of your page -->
+<script type="text/javascript" src="https://vk.com/js/api/openapi.js?168"></script>
+
+<script type="text/javascript">
+  VK.init({apiId: 7557739, onlyWidgets: true});
+</script>
+
+@endsection
+
 @section('content')
 
 <section id="event_header" style="background-image:url({!! !empty($event->promo_image) ? Voyager::image($event->promo_image) : '' !!})">
@@ -86,6 +97,26 @@
         </div>
     </div>
 </section>
+
+
+<section class="comments">
+    <div class="container">
+        <div class="row">
+            <h2>Комментарии</h2>
+        </div>
+        <div class="row">
+            <!--Comments block will be -->
+            <div id="vk_comments">
+
+            </div>
+
+            <script type="text/javascript">
+                VK.Widgets.Comments("vk_comments", {limit: 10, attach: "*"});
+            </script>
+        </div>
+    </div>
+</section>
+
 <section class="similiar-events">
     <div class="items-list">
         <div class="container">

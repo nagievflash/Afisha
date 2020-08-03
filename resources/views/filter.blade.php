@@ -79,13 +79,20 @@
         </div>
         <div class="items-list">
             <div class="container">
+                @if($events->count() > 0)
                 <div class="row">
                     <div class="fake-row">
                         @foreach ($events as $event)
                         @include('modules.events', array('event' => $event))
                         @endforeach
                     </div>
+
                 </div>
+                @else
+                <div class="row no-items" style="margin-bottom:50px;">
+                    <p class="text-center w-100">Нет предстоящих событий</p>
+                </div>
+                @endif
             </div>
         </div>
     </section>

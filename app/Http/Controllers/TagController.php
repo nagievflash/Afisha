@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Event as Events;
 use App\Tag as Tags;
+use App\News as News;
 
 class TagController extends Controller
 {
@@ -23,7 +24,10 @@ class TagController extends Controller
         $events = Events::where('status', 'PUBLISHED')->whereHas('tags', function($query) {
             $query->where('title', $this->tag);
         })->get();
-        return view('tag', compact('tag', 'events', 'bodyClass'));
+        $news = News::whereHas('tags', function($query) {
+            $query->where('title', $this->tag);
+        })->get();
+        return view('tag', compact('tag', 'events', 'bodyClass', 'news'));
     }
 
     /**
