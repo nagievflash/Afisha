@@ -28,6 +28,8 @@ Route::get('/search/{request}', 'SearchController@index')->name('search');
 Route::get('/tags/{tag}', 'TagController@index')->name('tag');
 Route::get('/news', 'NewsController@index')->name('news');
 Route::get('/news/{slug}', 'NewsController@show');
+Route::get('/organisations/{slug}', 'OrganisationsController@show');
+Route::post('/organisations/{slug}', 'OrganisationsController@create');
 Route::post('/subscribe', 'SubscribeController@create');
 
 Route::resource('wishlist', 'WishlistController', [

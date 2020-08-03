@@ -89,7 +89,33 @@ $(document).ready(function(){
                 $('.subscribe-block .input-message').html('<span class="text-success">Вы успешно подписались на нашу новостную рассылку.</span>')
             },
             error: function (data) {
-                $('.subscribe-block .input-message').html('<span class="text-danger">' + data.responseJSON.errors.email + '</<span></span>>')
+                $('.subscribe-block .input-message').html('<span class="text-danger">* ' + data.responseJSON.errors.email + '</span>')
+            }
+        })
+    })
+
+
+
+    $('.organisation-form').submit(function(e){
+        e.preventDefault();
+        data = $(this).serialize();
+        $.ajax({
+            url: $(this).attr('action'),
+            type: 'post',
+            data: data,
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            success: function (data) {
+                $('.contact-form-message').html('<span class="text-success">Ваше сообщение отправлено. В ближайшее время с вами свяжутся.</span>')
+            },
+            error: function (data) {
+                $('.contact-form-message').html('<span class="text-danger"></span>')
+                console.log(data.responseJSON)
+                 $.each(data.responseJSON.errors, function(index, element){
+                     $('.contact-form-message .text-danger').append('<span>' + element + '</span>')
+                 })
+
             }
         })
     })

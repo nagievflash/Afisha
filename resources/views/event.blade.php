@@ -20,6 +20,7 @@
             <div class="promo-content">
                 <div class="event__title"><h2>{{$event->title}}</h2></div>
                 <div class="event__description"><p>{{$event->excerpt}}</p></div>
+                <div class="event__organisator">Организатор: <a href="/organisations/{{$event->organisation->slug}}" class="organisation-link">{{$event->organisation->title}}</a></div>
             </div>
             <div class="promo-footer">
                 <div class="col">

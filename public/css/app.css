@@ -11205,6 +11205,13 @@ p {
   margin-top: 75px;
   width: 100%;
 }
+#event_header .promo-content .event__organisator {
+  font-size: 18px;
+  padding-top: 20px;
+  border-top: 1px solid #fff;
+  width: initial;
+  display: table;
+}
 #event_header .promo-content .event__title h2 {
   font-size: 44px;
   color: #fff;
@@ -11501,6 +11508,132 @@ p {
   width: 100%;
   max-width: 473px;
   margin-bottom: 1.667rem;
+}
+
+.organisation h1 {
+  margin-bottom: 50px;
+}
+.organisation .company-description {
+  margin: 35px 0;
+  padding: 75px 0;
+  background: linear-gradient(164.51deg, #E4F4FF 19.35%, #DFF1FF 155.35%);
+  border-radius: 80px 0;
+}
+.organisation .company-description h2 {
+  margin-bottom: 20px;
+}
+.organisation .company-description p {
+  font-size: 18px;
+}
+.organisation .company-property {
+  padding-top: 40px;
+}
+.organisation .company-property h2 {
+  margin-bottom: 35px;
+}
+.organisation .company-property table {
+  width: 100% !important;
+  border-collapse: collapse !important;
+  border: none !important;
+}
+.organisation .company-property table tr:nth-child(odd) {
+  background-color: #f9f9f9;
+}
+.organisation .company-property table tr td {
+  font-size: 16px !important;
+  min-height: 50px !important;
+  vertical-align: center !important;
+  padding: 20px 35px;
+  text-align: left !important;
+  border-color: #ccc !important;
+}
+.organisation .company-property table tr td p {
+  margin-bottom: 0 !important;
+  text-align: left;
+}
+.organisation .company-location {
+  margin-top: 120px;
+  margin-bottom: 120px;
+}
+.organisation .contact-form {
+  margin-bottom: 75px;
+}
+.organisation .contact-form form {
+  width: 100%;
+}
+.organisation .contact-form form input {
+  padding: 12px 15px 11px;
+  padding-left: 25px;
+}
+.organisation .contact-form form textarea {
+  background-color: #fbfdfd;
+  border: none;
+  border-radius: 20px !important;
+  padding: 12px 15px 10px;
+  padding-left: 25px;
+  -webkit-filter: none;
+  filter: none;
+  font-size: 1.2em;
+  box-shadow: rgba(193, 193, 193, 0.4) 0px 5px 20px;
+  height: auto;
+  transition-duration: 0.3s;
+  transition-property: background, box-shadow, transform;
+  transition-timing-function: ease;
+  cursor: text !important;
+  transition: 0.3s ease-in-out all;
+  max-height: 160px;
+}
+.organisation .contact-form form textarea:hover {
+  box-shadow: rgba(193, 193, 193, 0.7) 0px 5px 20px;
+}
+.organisation .contact-form form textarea:focus, .organisation .contact-form form textarea:active {
+  transition-duration: 0.15s;
+  box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
+  background: rgba(0, 0, 0, 0.02);
+  outline: 0px;
+}
+.organisation .contact-form h2 {
+  position: relative;
+  z-index: 1;
+  color: #A06784;
+}
+.organisation .contact-form .contact-form-message {
+  width: 100%;
+  margin: 15px 0;
+}
+.organisation .contact-form .contact-form-message .text-danger {
+  padding: 15px;
+  background-color: #e3342f9c;
+  margin-top: 15px;
+  display: block;
+  font-size: 14px;
+  border-radius: 20px;
+  padding: 11px 15px 10px;
+  text-align: center;
+  color: #fff !important;
+}
+.organisation .contact-form .contact-form-message .text-danger span {
+  margin: 5px 0;
+  width: 100%;
+  display: block;
+}
+.organisation .contact-form .contact-form-message .text-success {
+  padding: 15px;
+  width: 100%;
+  display: block;
+  color: #fff !important;
+  background-color: #63c88e !important;
+  border-color: #c7eed8;
+  border-radius: 20px;
+  padding: 15px 25px;
+  font-size: 16px;
+  font-weight: bold;
+  text-align: center;
+}
+.organisation .contact-form .contact-form-message .text-success span {
+  margin: 5px 0;
+  width: 100%;
+  display: block;
 }
 
 header {
@@ -12363,10 +12496,11 @@ header .menu-wrapper .main-menu li.active a {
   }
 }
 footer {
-  margin-top: -100px;
-  padding-top: 280px;
+  margin-top: 35px;
+  padding-top: 75px;
   padding-bottom: 30px;
-  background-image: url(/css/icons/footer-mask.svg);
+  background: linear-gradient(-183.96deg, #FCF3F4 2.01%, rgba(244, 224, 224, 0.2) 79.47%);
+  border-radius: 80px 0 0 0;
   background-size: 100% 100%;
   background-position: top center;
   background-repeat: no-repeat;
@@ -12511,6 +12645,7 @@ footer .copyright a:hover span {
   left: 40px;
   top: 0;
   background-color: #FFF5F6;
+  z-index: -1;
 }
 .authenticate .auth-title {
   font-size: 36px;

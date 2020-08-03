@@ -67,6 +67,14 @@ class Event extends Model
         return $this->belongsToMany('App\Page', 'page_event');
     }
 
+    /**
+     * Получить организацию.
+     */
+    public function organisation()
+    {
+        return $this->belongsTo('App\Organisation');
+    }
+
 
     /**
      * Получить расписание.

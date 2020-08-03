@@ -36,7 +36,7 @@
                     </div>
                     <div class="col-md-6">
                         <div class="row">
-                            <a href="/events/{{$promo->slug}}#schedule" class="event__accept ml-auto">
+                            <a href="/events/{{$promo->slug}}" class="event__accept ml-auto">
                                 <span class="event-accept">Пойти</span>
                                 <span class="event-angle">@include('assets.angle')</span>
                             </a>

@@ -197,12 +197,12 @@ return [
     ],
 
     'googlemaps' => [
-        'key'    => env('GOOGLE_MAPS_KEY', ''),
+        'key'    => env('GOOGLE_MAPS_KEY', 'AIzaSyANE6EGTbGjH5KP-gINO9GNb1qiYxQ3ymA'),
         'center' => [
-            'lat' => env('GOOGLE_MAPS_DEFAULT_CENTER_LAT', '32.715738'),
-            'lng' => env('GOOGLE_MAPS_DEFAULT_CENTER_LNG', '-117.161084'),
+            'lat' => env('GOOGLE_MAPS_DEFAULT_CENTER_LAT', '63.7905746'),
+            'lng' => env('GOOGLE_MAPS_DEFAULT_CENTER_LNG', '74.4986044'),
         ],
-        'zoom' => env('GOOGLE_MAPS_DEFAULT_ZOOM', 11),
+        'zoom' => env('GOOGLE_MAPS_DEFAULT_ZOOM', 17),
     ],
 
     // Activate compass when environment is NOT local

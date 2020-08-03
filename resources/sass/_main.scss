@@ -408,6 +408,14 @@ p {
 	.promo-content {
 		margin-top:75px;
 		width:100%;
+
+        .event__organisator {
+            font-size: 18px;
+            padding-top: 20px;
+            border-top: 1px solid #fff;
+            width: initial;
+            display: table;
+        }
 		.event__title {
 			h2 {
 				font-size:44px;
@@ -729,6 +737,136 @@ p {
             width: 100%;
             max-width: 473px;
             margin-bottom: 1.667rem;
+        }
+    }
+}
+
+.organisation {
+    h1 {
+        margin-bottom: 50px;
+    }
+    .company-description {
+                    margin: 35px 0;
+                    padding: 75px 0;
+                    background: linear-gradient(164.51deg, #E4F4FF 19.35%, #DFF1FF 155.35%);
+                    border-radius: 80px 0;
+                    h2 {
+                        margin-bottom: 20px;
+                    }
+                    p {
+                        font-size:18px;
+                    }
+                }
+    .company-property {
+        padding-top:40px;
+        h2 {
+            margin-bottom: 35px;
+        }
+        table {
+            width:100%!important;
+            border-collapse:collapse!important;
+            border:none!important;
+            tr {
+                &:nth-child(odd) {
+                    background-color:#f9f9f9;
+                }
+                td {
+                    font-size: 16px !important;
+                    min-height: 50px !important;
+                    vertical-align: center !important;
+                    padding: 20px 35px;
+                    text-align: left!important;
+                    border-color:#ccc!important;
+                    p {
+                        margin-bottom:0!important;
+                        text-align:left;
+                    }
+                }
+            }
+        }
+    }
+    .company-location {
+        margin-top:120px;
+        margin-bottom:120px;
+    }
+    .contact-form {
+        margin-bottom:75px;
+        form {
+            width:100%;
+            input {
+                padding: 12px 15px 11px;
+                padding-left:25px;
+            }
+            textarea {
+                background-color: #fbfdfd;
+                border: none;
+                border-radius: 20px !important;
+                padding: 12px 15px 10px;
+                padding-left: 25px;
+                -webkit-filter: none;
+                filter: none;
+                font-size: 1.2em;
+                box-shadow: rgba(193, 193, 193, 0.4) 0px 5px 20px;
+                height: auto;
+                transition-duration: 0.3s;
+                transition-property: background, box-shadow, transform;
+                transition-timing-function: ease;
+                cursor: text !important;
+                transition: 0.3s ease-in-out all;
+                max-height:160px;
+                &:hover {
+                    box-shadow: rgba(193, 193, 193, 0.7) 0px 5px 20px;
+                }
+                &:focus, &:active {
+                    transition-duration: 0.15s;
+                    box-shadow: rgba(193, 193, 193, 0.4) 0px 1px 3px;
+                    background: rgba(0, 0, 0, 0.02);
+                    outline: 0px;
+                }
+            }
+        }
+        h2 {
+            position: relative;
+            z-index: 1;
+            color: #A06784;
+        }
+        .contact-form-message {
+            width:100%;
+            margin: 15px 0;
+            .text-danger  {
+                padding:15px;
+                background-color: #e3342f9c;
+                margin-top: 15px;
+                display: block;
+                font-size: 14px;
+                border-radius: 20px;
+                padding: 11px 15px 10px;
+                text-align: center;
+                color: #fff !important;
+                span {
+                    margin:5px 0;
+                    width:100%;
+                    display:block;
+                }
+            }
+            .text-success {
+                padding: 15px;
+                width: 100%;
+                display: block;
+                color: #fff!important;
+                background-color: #63c88e !important;
+                border-color: #c7eed8;
+                border-radius: 20px;
+                padding: 15px 25px;
+                font-size: 16px;
+                font-weight: bold;
+                text-align: center;
+                span {
+                    margin:5px 0;
+                    width:100%;
+                    display:block;
+                }
+            }
         }
     }
 }
