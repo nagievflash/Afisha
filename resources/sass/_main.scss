@@ -871,8 +871,9 @@ p {
     }
 }
 .comments {
-    padding: 120px 0;
-    box-shadow: 15px 15px 45px rgba(237, 164, 164, 0.2) inset;
-    border-radius: 0 0 80px;
-    background-color: #fff1f1;
+    padding: 120px 0 130px;
+    background-color: #efefef;
+    h2 {
+        margin-bottom:35px;
+    }
 }
