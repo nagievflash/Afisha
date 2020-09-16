@@ -105,7 +105,7 @@
                             <div class="form-group">
                                 <label for="email">Дата рождения</label>
                                 <input required  type="date" class="form-control" name="birthday"
-                                       value="@if(isset($dataTypeContent->birthday)){{ \Carbon\Carbon::parse(old('birthday', $dataTypeContent->birthday))->format('d.m.Y') }}@else{{old('birthday')}}@endif">
+                                       value="@if(isset($dataTypeContent->birthday)){{ \Carbon\Carbon::parse(old('birthday', $dataTypeContent->birthday))->format('Y-m-d') }}@else{{old('birthday')}}@endif">
 
                             </div>
                             @if(isset($dataTypeContent->birthday)) {{ \Carbon\Carbon::parse(old('birthday', $dataTypeContent->birthday))->format('d.m.Y') }} @endif
