@@ -11644,6 +11644,15 @@ p {
   margin-bottom: 35px;
 }
 
+.event-description {
+  font-size: 20px;
+  margin-top: 25px;
+}
+.event-description p {
+  width: 100%;
+  font-size: 18px !important;
+}
+
 header {
   z-index: 2;
   position: relative;
