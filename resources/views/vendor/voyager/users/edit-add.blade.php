@@ -108,7 +108,6 @@
                                        value="@if(isset($dataTypeContent->birthday)){{ \Carbon\Carbon::parse(old('birthday', $dataTypeContent->birthday))->format('Y-m-d') }}@else{{old('birthday')}}@endif">
 
                             </div>
-                            @if(isset($dataTypeContent->birthday)) {{ \Carbon\Carbon::parse(old('birthday', $dataTypeContent->birthday))->format('d.m.Y') }} @endif
                         </div>
                     </div>
                 </div>
