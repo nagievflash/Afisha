@@ -128,7 +128,7 @@
                             </div>
                         </div>
                         <div class="panel-body">
-                            <textarea class="form-control" name="excerpt">{{ $dataTypeContent->excerpt ?? '' }}</textarea>
+                            <textarea class="form-control" name="excerpt" placeholder="{{ $dataTypeContent->excerpt ?? '' }}"></textarea>
                         </div>
                     </div>
 
