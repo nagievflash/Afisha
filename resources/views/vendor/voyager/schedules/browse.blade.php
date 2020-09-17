@@ -184,7 +184,7 @@
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
 
                                                     @if($row->field == 'scheduleable_id')
-                                                        @if (!empty(App\Event::where('id', $data->{$row->field})))
+                                                        @if ( App\Event::where('id', $data->{$row->field})->count() > 0 )
                                                         {{ App\Event::where('id', $data->{$row->field})->first()->title }}
                                                         @endif
                                                     @else
