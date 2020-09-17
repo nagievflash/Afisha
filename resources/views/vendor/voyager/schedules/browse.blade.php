@@ -184,7 +184,9 @@
                                                     @include('voyager::multilingual.input-hidden-bread-browse')
 
                                                     @if($row->field == 'scheduleable_id')
+                                                        @if (!empty(App\Event::where('id')))
                                                         {{ App\Event::where('id', $data->{$row->field})->first()->title }}
+                                                        @endif
                                                     @else
                                                     <div>{{ mb_strlen( $data->{$row->field} ) > 200 ? mb_substr($data->{$row->field}, 0, 200) . ' ...' : $data->{$row->field} }}</div>
                                                     @endif
