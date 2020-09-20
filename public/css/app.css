@@ -10601,6 +10601,7 @@ p {
   padding: 30px 25px 20px;
   min-height: 216px;
   position: relative;
+  background: linear-gradient(to bottom, #1261a7, #0e317100 50%);
 }
 .items-list .item .item-image * {
   color: #fff;
