@@ -1,14 +1,16 @@
 @php
     $schedule = $promo->schedules()->get();
-    if ($schedule->first()):
-        $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
-        $price = $schedule->first()->price;
-        if ($price && $price != 0) {
-            $price .= ' Рублей';
-        }
+    if ($shcedule->count() > 0):
+        if ($schedule->first()):
+            $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
+            $price = $schedule->first()->price;
+            if ($price && $price != 0) {
+                $price .= ' Рублей';
+            }
         else $price = false;
 @endphp
 
+@if ($shcedule->count() > 0)
 <section id="promo" style="background-image:url({{ Voyager::image( $promo->promo_image ) }})">
     <div class="container">
         <div class="promo-header">
@@ -48,5 +50,5 @@
         </div>
     </div>
 </section>
-
+@endif
 @endif
