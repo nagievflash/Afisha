@@ -1,5 +1,5 @@
 @php
-    if ($promo->schedules()->count() > 0):
+    if (!empty($promo)):
     $schedule = $promo->schedules()->get();
         if ($schedule->first()):
             $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
