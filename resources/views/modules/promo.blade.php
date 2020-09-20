@@ -1,6 +1,6 @@
 @php
+    if ($promo->schedules()->count() > 0):
     $schedule = $promo->schedules()->get();
-    if ($shcedules->count() > 0):
         if ($schedule->first()):
             $date = Date::parse($schedule->first()->date)->format('d F').' '.Date::parse($schedule->first()->time)->format('H:i');
             $price = $schedule->first()->price;
