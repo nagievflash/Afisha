@@ -25,4 +25,12 @@ class Organisation extends Model
     protected $guarded = [];
 
     protected $spatial = ['location'];
+
+    /**
+     * Получить теги.
+     */
+    public function users()
+    {
+        return $this->belongsToMany('App\User', 'user_organisation');
+    }
 }
