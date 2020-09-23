@@ -51,7 +51,7 @@
         <div class="col row no-gutter">
             <div class="d-flex justify-content-start filter-wrapper">
                 <div class="input-group">
-                    <input type="text" name="range" value="{{$from}} - {{$to}}" placeholder="Выберите дату" class="form-control range-input" />
+                    <input type="text" name="range" value="@if ($from != $to) {{$from}} - {{$to}} @else {{$from}} @endif" placeholder="Выберите дату" class="form-control range-input" />
                     <div class="input-group-prepend">
                         <div class="input-group-text">@include('assets.calendar')</div>
                     </div>

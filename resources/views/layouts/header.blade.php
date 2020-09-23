@@ -46,7 +46,6 @@
                             <a class="dropdown-item" href="{{ route('register') }}">Зарегистрироваться</a>
                             @else
                             <a class="dropdown-item" href="{{route('wishlist')}}">Моя афиша</a>
-                            <a class="dropdown-item" href="#">Мои билеты</a>
                             <a class="dropdown-item" href="{{route('profile')}}">Управление аккаунтом</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ route('logout') }}">Выход</a>

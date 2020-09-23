@@ -10506,6 +10506,7 @@ p {
 }
 .input-group input.range-input, .input-group select.range-input {
   cursor: pointer;
+  padding-right: 35px;
 }
 .input-group input:active, .input-group input:focus, .input-group select:active, .input-group select:focus {
   transition-duration: 0.15s;
@@ -11384,6 +11385,7 @@ p {
 }
 .event .main-content .schedule .schedule-item .location {
   font-size: 20px;
+  text-align: center;
 }
 .event .main-content .schedule .schedule-item .location svg {
   margin-right: 5px;
@@ -11409,6 +11411,13 @@ p {
 }
 .event .main-content .schedule .schedule-item .ticket a:hover {
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+.event .main-content .schedule .schedule-item .price {
+  font-size: 24px;
+  text-align: center;
+}
+.event .main-content .schedule .schedule-item .price.free {
+  font-size: 20px;
 }
 .event .main-content .similiar-events {
   padding: 150px 0 40px;

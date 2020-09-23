@@ -86,9 +86,9 @@
                             <span class="icon-location">@include('assets.location')</span>{{$event->location}}
                         </div>
                     </div>
-                    <div class="schedule-item ticket-item">
-                        <div class="ticket">
-                            <a href="ticket-buy">@php if ($schedule->price == 0) echo 'Бесплатно'; else echo $schedule->price.' рублей'; @endphp</a>
+                    <div class="schedule-item price-item">
+                        <div class="price @php if ($schedule->price == 0) echo 'free'; @endphp">
+                            @php if ($schedule->price == 0) echo 'Бесплатно'; else echo $schedule->price.' ₽'; @endphp
                         </div>
                     </div>
                 </div>

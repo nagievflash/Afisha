@@ -50,4 +50,5 @@ require ('./modules/slider.js');
 require ('./custom.js');
 
 //daterangepicker
+require ('./modules/daterangepicker.min.js')
 require ('./modules/daterangepicker.js')

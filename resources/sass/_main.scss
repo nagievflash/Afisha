@@ -74,6 +74,7 @@ p {
         }
         &.range-input {
             cursor:pointer;
+            padding-right: 35px;
         }
         &:active, &:focus {
             transition-duration: 0.15s;
@@ -610,6 +611,7 @@ p {
                             fill:#333;
                         }
                     }
+                    text-align: center;
                 }
                 .ticket {
                     text-align:right;
@@ -627,6 +629,14 @@ p {
                         &:hover {
                             box-shadow: 0 2px 5px rgba(0,0,0,.3);
                         }
+                    }
+                }
+
+                .price {
+                    font-size:24px;
+                    text-align: center;
+                    &.free {
+                        font-size:20px;
                     }
                 }
             }
