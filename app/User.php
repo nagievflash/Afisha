@@ -54,4 +54,10 @@ class User extends \TCG\Voyager\Models\User
             $query->where('date', '>', date("Y-m-d"));
         })->get();
     }
+
+
+    public function scopeModerator($query)
+    {
+        return $query->whereIn('role_id', [1, 3]);
+    }
 }

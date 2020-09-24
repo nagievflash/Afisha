@@ -34,8 +34,4 @@ class Organisation extends Model
         return $this->belongsToMany('App\User', 'user_organisation');
     }
 
-    public function scopeModerator($query)
-    {
-        return $query->roles()->where('name', 'moderator');
-    }
 }
