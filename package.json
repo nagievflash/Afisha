@@ -31,6 +31,6 @@
         "imagesloaded": "^4.1.4",
         "litepicker": "^1.5.5",
         "moment": "^2.27.0",
-        "three": "^0.117.1"
+        "three": "^0.137.0"
     }
 }
